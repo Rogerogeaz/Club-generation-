@@ -1,0 +1,6690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>🍺 Generation Club</title>
+
+<meta name="theme-color"
+content="#D4AF37">
+
+<meta name="apple-mobile-web-app-capable"
+content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+content="black">
+
+<link rel="manifest"
+href="manifest.json">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/*==================================================
+GENERAL
+==================================================*/
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
+
+}
+
+:root{
+
+--gold:#D4AF37;
+--goldLight:#FFD86B;
+--black:#050505;
+--dark:#111111;
+--glass:rgba(255,255,255,.08);
+--border:rgba(255,255,255,.15);
+
+}
+
+html,
+body{
+
+width:100%;
+height:100%;
+
+overflow:hidden;
+
+background:#000;
+
+color:#fff;
+
+}
+
+body{
+
+background:
+
+linear-gradient(
+
+rgba(0,0,0,.82),
+
+rgba(0,0,0,.92)
+
+),
+
+url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1600")
+
+center/cover
+
+no-repeat
+
+fixed;
+
+}
+
+.hidden{
+
+display:none!important;
+
+}
+
+.pageFade{
+
+animation:pageFade .35s ease;
+
+}
+
+@keyframes pageFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+button,
+input,
+select{
+
+font-family:inherit;
+
+outline:none;
+
+}
+
+button{
+
+cursor:pointer;
+
+border:none;
+
+transition:.25s;
+
+}
+
+button:hover{
+
+opacity:.92;
+
+}
+
+input,
+select{
+
+font-size:16px;
+
+}
+
+img{
+
+display:block;
+
+max-width:100%;
+
+}
+/*==================================================
+SPLASH SCREEN
+==================================================*/
+
+#splashScreen{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,.82),
+rgba(0,0,0,.92)
+),
+
+url("https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600")
+
+center/cover;
+
+z-index:9999;
+
+}
+
+.splashCard{
+
+width:90%;
+
+max-width:360px;
+
+padding:30px;
+
+border-radius:25px;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(212,175,55,.35);
+
+text-align:center;
+
+box-shadow:0 15px 40px rgba(0,0,0,.5);
+
+}
+
+#splashLogo{
+
+width:120px;
+
+height:120px;
+
+margin:auto;
+
+margin-bottom:20px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:4px solid var(--gold);
+
+}
+
+.splashTitle{
+
+font-size:30px;
+
+font-weight:800;
+
+color:var(--gold);
+
+margin-bottom:10px;
+
+}
+
+.splashSubtitle{
+
+font-size:15px;
+
+color:#ddd;
+
+margin-bottom:25px;
+
+}
+
+.loadingBar{
+
+width:100%;
+
+height:10px;
+
+background:#222;
+
+border-radius:30px;
+
+overflow:hidden;
+
+}
+
+.loadingFill{
+
+width:0;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#b8860b,
+
+#ffd700,
+
+#fff5b0
+
+);
+
+animation:loading 3s linear forwards;
+
+}
+
+.loadingText{
+
+margin-top:15px;
+
+font-size:14px;
+
+color:#ccc;
+
+}
+
+
+@keyframes loading{
+
+0%{
+
+width:0;
+
+}
+
+100%{
+
+width:100%;
+
+}
+
+}
+
+/*==================================================
+LOGIN PAGE
+==================================================*/
+
+#loginPage{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+background:
+
+linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.92)),
+
+url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1600")
+
+center/cover no-repeat;
+
+}
+
+.loginContainer{
+
+width:100%;
+
+max-width:420px;
+
+}
+
+.loginCard{
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(212,175,55,.35);
+
+border-radius:25px;
+
+padding:30px;
+
+text-align:center;
+
+box-shadow:0 15px 40px rgba(0,0,0,.5);
+
+}
+
+.loginLogo{
+
+width:90px;
+
+height:90px;
+
+margin:auto;
+
+margin-bottom:20px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:rgba(212,175,55,.15);
+
+border:2px solid var(--gold);
+
+font-size:36px;
+
+color:var(--gold);
+
+}
+
+.loginCard h1{
+
+font-size:28px;
+
+font-weight:700;
+
+color:var(--gold);
+
+margin-bottom:8px;
+
+}
+
+.loginCard p{
+
+color:#ddd;
+
+margin-bottom:25px;
+
+}
+
+.loginCard input,
+.loginCard select{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:rgba(255,255,255,.08);
+
+color:#fff;
+
+font-size:15px;
+
+}
+
+.loginCard input::placeholder{
+
+color:#bbb;
+
+}
+
+.loginCard button{
+
+width:100%;
+
+padding:15px;
+
+border-radius:12px;
+
+background:var(--gold);
+
+color:#000;
+
+font-size:16px;
+
+font-weight:700;
+
+}
+
+.loginCard button:hover{
+
+background:var(--goldLight);
+
+}
+/*==================================================
+MAIN APPLICATION
+==================================================*/
+
+#app{
+
+width:100%;
+
+height:100%;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.topBar{
+
+height:70px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 20px;
+
+background:rgba(0,0,0,.55);
+
+backdrop-filter:blur(15px);
+
+border-bottom:1px solid rgba(212,175,55,.2);
+
+}
+
+.brand{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.brand i{
+
+font-size:28px;
+
+color:var(--gold);
+
+}
+
+.brand h2{
+
+font-size:20px;
+
+color:var(--gold);
+
+}
+
+.brand small{
+
+color:#ccc;
+
+}
+
+.topActions{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+#loggedUser{
+
+font-size:14px;
+
+color:#fff;
+
+}
+
+#logoutBtn{
+
+padding:10px 18px;
+
+border-radius:10px;
+
+background:var(--gold);
+
+color:#000;
+
+font-weight:600;
+
+}
+
+.appBody{
+
+flex:1;
+
+display:flex;
+
+overflow:hidden;
+
+}
+
+.sideMenu{
+
+width:90px;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(15px);
+
+border-right:1px solid rgba(212,175,55,.15);
+
+padding:10px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+overflow-y:auto;
+
+}
+
+.menuBtn{
+
+background:transparent;
+
+border:none;
+
+color:#fff;
+
+border-radius:14px;
+
+padding:12px 6px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:8px;
+
+transition:.25s;
+
+}
+
+.menuBtn:hover{
+
+background:rgba(212,175,55,.12);
+
+}
+
+.menuBtn.active{
+
+background:rgba(212,175,55,.18);
+
+color:var(--gold);
+
+}
+
+.menuBtn i{
+
+font-size:22px;
+
+}
+
+.menuBtn span{
+
+font-size:12px;
+
+text-align:center;
+
+}
+
+.contentArea{
+    flex:1;
+    overflow:auto;
+    padding:90px 20px 20px;
+}
+.goldBtn{
+
+background:var(--gold);
+
+color:#000;
+
+padding:12px 20px;
+
+border-radius:12px;
+
+font-weight:700;
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+.goldBtn:hover{
+
+background:var(--goldLight);
+
+}
+/*==================================================
+MODALS
+==================================================*/
+
+.modal{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.75);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+z-index:999;
+
+}
+
+.modalCard{
+
+width:100%;
+
+max-width:450px;
+
+max-height:90vh;
+
+overflow:auto;
+
+background:#161616;
+
+border:1px solid rgba(212,175,55,.3);
+
+border-radius:20px;
+
+padding:25px;
+
+}
+
+.modalCard h2{
+
+color:var(--gold);
+
+margin-bottom:20px;
+
+}
+
+.modalCard input,
+.modalCard select{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:14px;
+
+border:none;
+
+border-radius:10px;
+
+background:#242424;
+
+color:#fff;
+
+}
+
+.modalButtons{
+
+display:flex;
+
+gap:10px;
+
+margin-top:10px;
+
+}
+
+.cancelBtn{
+
+flex:1;
+
+padding:14px;
+
+border-radius:10px;
+
+background:#555;
+
+color:#fff;
+
+}
+
+.goldBtn{
+
+flex:1;
+
+}
+/*==================================================
+CARDS
+==================================================*/
+/*==================================================
+POS PRODUCT CARDS
+==================================================*/
+
+.productGrid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.posProductCard{
+
+cursor:pointer;
+
+padding:18px;
+
+text-align:center;
+
+transition:.25s;
+
+user-select:none;
+
+}
+
+.posProductCard:hover{
+
+transform:translateY(-3px);
+
+border:1px solid var(--gold);
+
+box-shadow:0 0 15px rgba(212,175,55,.25);
+
+}
+
+.posProductCard h3{
+
+color:var(--gold);
+
+font-size:18px;
+
+margin-bottom:8px;
+
+}
+
+.posProductCard small{
+
+display:block;
+
+color:#ccc;
+
+margin-bottom:10px;
+
+}
+
+.posProductCard .price{
+
+font-size:20px;
+
+font-weight:700;
+
+color:#fff;
+
+}
+
+.glassCard{
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(212,175,55,.25);
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.inventoryCard{
+    width:100%;
+    max-width:700px;
+    margin:0 auto 25px;
+}
+
+
+#receiveStockBtn{
+    width:100%;
+    justify-content:center;
+    margin-top:20px;
+}
+
+
+
+/*==================================================
+PAGE HEADINGS
+==================================================*/
+
+.pageTitle{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:42px;
+    font-weight:800;
+    color:#fff;
+    margin:70px 0 10px;
+}
+.pageTitle i{
+    color:var(--gold);
+}
+
+.pageSubtitle{
+    color:#ddd;
+    font-size:17px;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+/*==================================================
+FORMS
+==================================================*/
+
+.glassCard label{
+    display:block;
+    margin:15px 0 8px;
+    color:var(--gold);
+    font-weight:600;
+}
+
+.goldInput{
+    width:100%;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid rgba(212,175,55,.25);
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-size:15px;
+}
+
+.goldInput::placeholder{
+    color:#bbb;
+}
+
+.goldInput:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 10px rgba(212,175,55,.25);
+}
+</style>
+
+</head>
+
+<body>
+
+<!--==================================================
+SPLASH SCREEN
+==================================================-->
+<div id="splashScreen">
+
+<div class="splashCard">
+
+<img
+id="splashLogo"
+src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800"
+alt="Generation Club">
+
+<div class="splashTitle">
+
+🍺 GENERATION CLUB
+
+</div>
+
+<div class="splashSubtitle">
+
+Bar POS & Inventory Management System
+
+</div>
+
+<div class="loadingBar">
+
+<div class="loadingFill"></div>
+
+</div>
+
+<div class="loadingText">
+
+Loading...
+
+</div>
+
+</div>
+
+</div>
+
+
+<!--==================================================
+LOGIN PAGE
+==================================================-->
+
+<div id="loginPage" class="hidden">
+
+<div class="loginContainer">
+
+<div class="loginCard">
+
+<div class="loginLogo">
+
+<i class="fa-solid fa-beer-mug-empty"></i>
+
+</div>
+
+<h1>
+
+GENERATION CLUB
+
+</h1>
+
+<p>
+
+Bar POS & Inventory Management System
+
+</p>
+
+
+<input
+type="text"
+id="loginEmployeeNo"
+placeholder="Employee Number">
+
+<input
+type="password"
+id="loginPin"
+placeholder="PIN">
+
+<button
+id="loginBtn"
+type="button">
+
+<i class="fa-solid fa-right-to-bracket"></i>
+
+LOGIN
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!--==================================================
+MAIN APPLICATION
+==================================================-->
+<div id="app" class="hidden">
+
+<header class="topBar">
+
+<div class="brand">
+
+<i class="fa-solid fa-beer-mug-empty"></i>
+
+<div>
+
+<h2>GENERATION CLUB</h2>
+
+<small>Bar POS & Inventory</small>
+
+</div>
+
+</div>
+
+<div class="topActions">
+
+<span id="loggedUser">
+
+Guest
+
+</span>
+
+<button id="logoutBtn">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</button>
+
+</div>
+
+</header>
+
+<div class="appBody">
+
+<nav class="sideMenu">
+
+<button
+class="menuBtn active"
+data-page="dashboardPage">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Dashboard</span>
+
+</button>
+
+<button
+class="menuBtn"
+data-page="posPage">
+
+<i class="fa-solid fa-cash-register"></i>
+
+<span>POS</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="brandsPage">
+
+<i class="fa-solid fa-tags"></i>
+
+<span>Brands</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="categoriesPage">
+
+<i class="fa-solid fa-layer-group"></i>
+
+<span>Categories</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="productsPage">
+
+<i class="fa-solid fa-boxes-stacked"></i>
+
+<span>Products</span>
+
+</button>
+
+<button
+class="menuBtn"
+data-page="suppliersPage">
+
+<i class="fa-solid fa-truck-field"></i>
+
+<span>Suppliers</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="receiveStockPage">
+
+<i class="fa-solid fa-truck-ramp-box"></i>
+
+<span>Receive</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="stockMovementsPage">
+
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+<span>Movements</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="inventoryPage">
+
+<i class="fa-solid fa-warehouse"></i>
+
+<span>Inventory</span>
+
+</button>
+
+
+
+<button
+class="menuBtn"
+data-page="employeesPage">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Employees</span>
+
+</button>
+
+<!--==================================================
+EXPENSE CATEGORIES MENU
+==================================================-->
+
+<button
+class="menuBtn"
+data-page="expenseCategoriesPage">
+
+<i class="fa-solid fa-list"></i>
+
+<span>Expense Types</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="expensesPage">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+<span>Expenses</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="shiftPage">
+
+<i class="fa-solid fa-clipboard-check"></i>
+
+<span>Shift</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="reportsPage">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<span>Reports</span>
+
+</button>
+<!--==================================================
+SALES HISTORY
+==================================================-->
+
+
+<button
+class="menuBtn"
+data-page="salesHistoryPage">
+
+<i class="fa-solid fa-receipt"></i>
+
+<span>Sales History</span>
+
+</button>
+<button
+class="menuBtn"
+data-page="settingsPage">
+
+<i class="fa-solid fa-gears"></i>
+
+<span>Settings</span>
+
+</button>
+
+</nav>
+
+<main class="contentArea">
+
+<!--==================================================
+DASHBOARD PAGE
+==================================================-->
+
+<section id="dashboardPage">
+
+<h1>Dashboard</h1>
+
+</section>
+
+<!--==================================================
+POS PAGE
+==================================================-->
+
+<section id="posPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-cash-register"></i>
+Point of Sale
+</h1>
+
+<p class="pageSubtitle">
+Tap drinks to add them to the current sale.
+</p>
+
+<!--==================================================
+POS SEARCH
+==================================================-->
+
+<div class="glassCard">
+
+<input
+id="posSearch"
+class="goldInput"
+type="text"
+placeholder="Search drink..."
+autocomplete="off"
+spellcheck="false"
+style="
+font-size:18px;
+padding:16px;
+margin-bottom:20px;
+">
+</div>
+
+<!--==================================================
+POS PRODUCTS
+==================================================-->
+
+<div
+id="posProducts"
+class="productGrid"
+style="
+margin-top:20px;
+margin-bottom:20px;
+">
+
+</div>
+
+<!--==================================================
+POS BILL
+==================================================-->
+
+<div class="glassCard">
+
+<h2 style="color:var(--gold);margin-bottom:10px;">
+
+Current Sale
+
+</h2>
+
+<hr style="
+border:none;
+border-top:1px solid rgba(212,175,55,.35);
+margin:15px 0 20px;
+">
+
+<div id="posCurrentSale">
+
+<div style="
+display:flex;
+justify-content:space-between;
+font-weight:bold;
+color:var(--gold);
+margin-bottom:10px;
+">
+
+<span>Drink</span>
+
+<span>Qty</span>
+
+<span>Total</span>
+
+</div>
+
+<div
+id="posSaleItems"
+style="
+display:flex;
+flex-direction:column;
+gap:10px;
+">
+
+<p style="
+text-align:center;
+color:#999;
+padding:15px 0;
+">
+
+No drinks added.
+
+</p>
+
+</div>
+
+</div>
+
+<!--==================================================
+SALE TOTAL
+==================================================-->
+
+<hr style="
+border:none;
+border-top:1px solid rgba(212,175,55,.35);
+margin:20px 0;
+">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+">
+
+<span style="
+font-size:22px;
+font-weight:bold;
+color:var(--gold);
+">
+
+Grand Total
+
+</span>
+
+<span
+id="posGrandTotal"
+style="
+font-size:26px;
+font-weight:bold;
+color:var(--gold);
+">
+
+KSh 0
+
+</span>
+
+</div>
+
+<!--==================================================
+POS PAYMENT
+==================================================-->
+
+<div style="margin-top:20px;">
+
+<hr style="
+border:none;
+border-top:1px solid rgba(212,175,55,.35);
+margin:15px 0;
+">
+
+<label style="
+color:var(--gold);
+font-size:18px;
+font-weight:bold;
+">
+
+Payment Method
+
+</label>
+
+<select
+id="posPaymentMethod"
+class="goldInput">
+
+<option value="Cash">Cash</option>
+<option value="M-Pesa">M-Pesa</option>
+<option value="Card">Card</option>
+
+</select>
+
+<label style="
+margin-top:15px;
+display:block;
+color:var(--gold);
+font-size:18px;
+font-weight:bold;
+">
+
+Amount Received
+
+</label>
+
+<input
+type="number"
+id="amountReceived"
+class="goldInput"
+placeholder="Enter amount received">
+
+<div style="
+margin-top:15px;
+padding:12px;
+border:1px solid rgba(212,175,55,.3);
+border-radius:12px;
+background:rgba(255,255,255,.04);
+">
+
+<span style="
+color:var(--gold);
+font-weight:bold;
+">
+
+Balance
+
+</span>
+
+<div
+id="balanceDisplay"
+style="
+font-size:24px;
+font-weight:bold;
+margin-top:5px;
+color:#6CFF8F;
+">
+
+KSh 0
+
+</div>
+
+</div>
+
+<button
+id="completePosSaleBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-check-circle"></i>
+
+Complete Sale
+
+</button>
+
+</div>
+
+</div>
+</section>
+<!--==================================================
+BRANDS PAGE
+==================================================-->
+
+<section id="brandsPage" class="hidden">
+
+<h1>Brands</h1>
+
+<p style="color:#ccc;margin-bottom:20px;">
+
+Manage all drink brands available in the system.
+
+</p>
+
+<button
+id="btnNewBrand"
+class="goldBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Brand
+
+</button>
+
+<div id="brandsList"></div>
+
+</section>
+
+<!--==================================================
+CATEGORIES PAGE
+==================================================-->
+
+<section id="categoriesPage" class="hidden">
+
+<h1>Categories</h1>
+
+<p style="color:#ccc;margin-bottom:20px;">
+
+Manage all product categories.
+
+</p>
+
+<button
+id="btnNewCategory"
+class="goldBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Category
+
+</button>
+
+<div id="categoriesList">
+
+No categories added.
+
+</div>
+
+</section>
+
+<!--==================================================
+PRODUCTS PAGE
+==================================================-->
+
+<section id="productsPage" class="hidden">
+
+<h1>Products</h1>
+
+<p style="color:#ccc;margin-bottom:20px;">
+
+Manage all drinks sold in the bar.
+
+</p>
+
+<button id="btnNewProduct" class="goldBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Product
+
+</button>
+<input
+id="productSearch"
+type="text"
+placeholder="Search product..."
+style="
+width:100%;
+max-width:400px;
+padding:14px;
+margin-bottom:20px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:#fff;
+">
+<div id="productsList">
+
+Products will appear here...
+
+</div>
+
+</section>
+
+<!--==================================================
+ADD BRAND MODAL
+==================================================-->
+
+<div id="brandModal" class="modal hidden">
+
+<div class="modalCard">
+
+<h2>New Brand</h2>
+
+<input
+id="brandName"
+type="text"
+placeholder="Brand Name">
+
+<div class="modalButtons">
+
+<button
+id="saveBrandBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Brand
+
+</button>
+
+<button
+id="closeBrandBtn"
+class="cancelBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!--==================================================
+ADD CATEGORY MODAL
+==================================================-->
+
+<div id="categoryModal" class="modal hidden">
+
+<div class="modalCard">
+
+<h2>New Category</h2>
+
+<input
+id="categoryName"
+type="text"
+placeholder="Category Name">
+
+<div class="modalButtons">
+
+<button
+id="saveCategoryBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Category
+
+</button>
+
+<button
+id="closeCategoryBtn"
+class="cancelBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+<!--==================================================
+ADD SUPPLIER MODAL
+==================================================-->
+
+<div id="supplierModal" class="modal hidden">
+
+<div class="modalCard">
+
+<h2>New Supplier</h2>
+
+<input
+id="supplierName"
+type="text"
+placeholder="Supplier Name">
+
+<div class="modalButtons">
+
+<button
+id="saveSupplierBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Supplier
+
+</button>
+
+<button
+id="closeSupplierBtn"
+class="cancelBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!--==================================================
+ADD PRODUCT MODAL
+==================================================-->
+
+<div id="productModal" class="modal hidden">
+
+<div class="modalCard">
+
+<h2>New Product</h2>
+
+<input
+id="productName"
+type="text"
+placeholder="Product Name">
+
+<select id="productBrand">
+
+<option value="">Select Brand</option>
+
+</select>
+
+<input
+id="manualBrand"
+type="text"
+placeholder="Or Enter New Brand">
+
+<select id="productCategory">
+
+<option value="">Select Category</option>
+
+</select>
+
+<input
+id="manualCategory"
+type="text"
+placeholder="Or Enter New Category">
+
+<select id="productPackage">
+
+<option value="">Select Package Size</option>
+
+<option value="250 ml">250 ml</option>
+
+<option value="300 ml">300 ml</option>
+
+<option value="330 ml">330 ml</option>
+
+<option value="350 ml">350 ml</option>
+
+<option value="500 ml">500 ml</option>
+
+<option value="750 ml">750 ml</option>
+
+<option value="1 L">1 L</option>
+
+<option value="1.25 L">1.25 L</option>
+
+<option value="1.5 L">1.5 L</option>
+
+<option value="5 L">5 L</option>
+
+<option value="20 L">20 L</option>
+
+<option value="Keg">Keg</option>
+
+<option value="Other">Other (Enter Below)</option>
+
+</select>
+
+<input
+id="manualPackage"
+type="text"
+placeholder="Or Enter Package Size">
+
+<select id="productSupplier">
+
+<option value="">Select Supplier</option>
+
+</select>
+
+<input
+id="manualSupplier"
+type="text"
+placeholder="Or Enter Supplier">
+
+<input
+id="buyPrice"
+type="number"
+placeholder="Buying Price">
+
+<input
+id="sellPrice"
+type="number"
+placeholder="Selling Price">
+
+<input
+id="minimumStock"
+type="number"
+placeholder="Minimum Stock">
+
+<input
+id="barcode"
+type="text"
+placeholder="Barcode (Optional)">
+
+<div class="modalButtons">
+
+<button
+id="saveProductBtn"
+class="goldBtn">
+
+Save Product
+
+</button>
+
+<button
+id="closeProductBtn"
+class="cancelBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!--==================================================
+SUPPLIERS PAGE
+==================================================-->
+
+<section id="suppliersPage" class="hidden">
+
+<h1>Suppliers</h1>
+
+<p style="color:#ccc;margin-bottom:20px;">
+
+Manage all product suppliers.
+
+</p>
+
+<button
+id="btnNewSupplier"
+class="goldBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Supplier
+
+</button>
+
+<div id="suppliersList">
+
+No suppliers added.
+
+</div>
+
+</section>
+
+<!--==================================================
+RECEIVE STOCK PAGE
+==================================================-->
+
+<section id="receiveStockPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-box-open"></i>
+Receive Stock
+</h1>
+
+<p class="pageSubtitle">
+Receive stock from suppliers into inventory.
+</p>
+
+<div class="glassCard inventoryCard">
+
+<label>Product</label>
+
+<select id="receiveProduct" class="goldInput">
+
+<option value="">Select Product</option>
+
+</select>
+
+<label>Quantity Received</label>
+
+<input
+id="receiveQuantity"
+class="goldInput"
+type="number"
+placeholder="Enter quantity">
+
+<label>Buying Price (Per Unit)</label>
+
+<input
+id="receiveCost"
+class="goldInput"
+type="number"
+placeholder="Buying price">
+
+<button
+id="receiveStockBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-box-open"></i>
+
+Receive Stock
+
+</button>
+
+</div>
+
+</section>
+
+<!--==================================================
+INVENTORY PAGE
+==================================================-->
+<!--==================================================
+STOCK MOVEMENTS PAGE
+==================================================-->
+
+<section id="stockMovementsPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+Stock Movements
+</h1>
+
+<p class="pageSubtitle">
+View every stock movement in the system.
+</p>
+
+<div class="glassCard">
+
+<div id="stockMovementsList">
+
+<p style="text-align:center;color:#999;">
+No stock movements available.
+</p>
+
+</div>
+
+</div>
+
+</section>
+<section id="inventoryPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-warehouse"></i>
+Inventory
+</h1>
+
+<p class="pageSubtitle">
+View current stock levels, stock status and inventory value.
+</p>
+
+<div class="glassCard">
+
+<input
+id="inventorySearch"
+class="goldInput"
+type="text"
+placeholder="Search product...">
+
+<select
+id="inventoryFilter"
+class="goldInput"
+style="margin-top:15px;">
+
+<option value="all">
+All Products
+</option>
+
+<option value="instock">
+In Stock
+</option>
+
+<option value="low">
+Low Stock
+</option>
+
+<option value="out">
+Out of Stock
+</option>
+
+</select>
+
+</div>
+
+<div id="inventorySummary" class="glassCard">
+
+<h2 style="color:var(--gold);margin-bottom:15px;">
+Current Stock Summary
+</h2>
+
+<div id="inventorySummaryCards">
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+">
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">Products</h3>
+
+<h2 id="summaryProducts">0</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">Units in Stock</h3>
+
+<h2 id="summaryUnits">0</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">Inventory Value</h3>
+
+<h2 id="summaryValue">KSh 0</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">Low Stock</h3>
+
+<h2 id="summaryLow">0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="glassCard">
+
+<h2 style="color:var(--gold);margin-bottom:15px;">
+Inventory List
+</h2>
+
+<div id="inventoryList">
+
+<p style="color:#999;">
+No inventory found.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!--==================================================
+EMPLOYEES PAGE
+==================================================-->
+
+<section id="employeesPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-users"></i>
+Employees
+</h1>
+
+<p class="pageSubtitle">
+Manage employees, PIN access and system roles.
+</p>
+
+<div class="glassCard inventoryCard">
+
+<label>Full Name</label>
+
+<input
+id="employeeName"
+class="goldInput"
+type="text"
+placeholder="Enter full name">
+
+<label>Employee Number</label>
+
+<input
+id="employeeNumber"
+class="goldInput"
+type="text"
+readonly
+placeholder="Automatically Generated">
+
+<label>Role</label>
+
+<select
+id="employeeRole"
+class="goldInput">
+
+<option value="">Select Role</option>
+<option value="Admin">Admin</option>
+<option value="Manager">Manager</option>
+<option value="Cashier">Cashier</option>
+
+</select>
+
+<label>PIN</label>
+
+<input
+id="employeePin"
+class="goldInput"
+type="password"
+maxlength="6"
+placeholder="Enter 4-6 digit PIN">
+
+<label>Status</label>
+
+<select
+id="employeeStatus"
+class="goldInput">
+
+<option value="Active">Active</option>
+<option value="Inactive">Inactive</option>
+
+</select>
+
+<button
+id="saveEmployeeBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Save Employee
+
+</button>
+
+</div>
+
+<div class="glassCard">
+
+<h2 style="color:var(--gold);margin-bottom:20px;">
+
+Employees
+
+</h2>
+
+<div id="employeeList">
+
+<p style="text-align:center;color:#999;">
+
+No employees added.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!--==================================================
+REPORTS PAGE
+==================================================-->
+<!--==================================================
+EXPENSE CATEGORIES PAGE
+==================================================-->
+
+<section id="expenseCategoriesPage" class="hidden">
+
+<h1>Expense Types</h1>
+
+<p style="color:#ccc;margin-bottom:20px;">
+
+Manage all expense categories used during shift reconciliation.
+
+</p>
+
+<button
+id="btnNewExpenseCategory"
+class="goldBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Expense Type
+
+</button>
+
+<div id="expenseCategoriesList">
+
+No expense types added.
+
+</div>
+
+</section>
+
+<!--==================================================
+ADD EXPENSE CATEGORY MODAL
+==================================================-->
+
+<div id="expenseCategoryModal" class="modal hidden">
+
+<div class="modalCard">
+
+<h2>New Expense Type</h2>
+
+<input
+id="expenseCategoryName"
+type="text"
+placeholder="Expense Type">
+
+<div class="modalButtons">
+
+<button
+id="saveExpenseCategoryBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save
+
+</button>
+
+<button
+id="closeExpenseCategoryBtn"
+class="cancelBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+<!--==================================================
+EXPENSES PAGE
+==================================================-->
+
+<section id="expensesPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-money-bill-wave"></i>
+Expenses
+</h1>
+
+<p class="pageSubtitle">
+Record every expense made during the shift.
+</p>
+
+<div class="glassCard inventoryCard">
+
+<label>Expense Type</label>
+
+<select
+id="expenseCategory"
+class="goldInput">
+
+<option value="">
+Select Expense Type
+</option>
+
+</select>
+
+<button
+id="newExpenseCategoryBtn"
+class="goldBtn"
+style="margin-top:10px;">
+
+<i class="fa-solid fa-plus"></i>
+
+New Expense Type
+
+</button>
+
+<label>Amount</label>
+
+<input
+id="expenseAmount"
+class="goldInput"
+type="number"
+placeholder="Enter amount">
+
+<label>Reason</label>
+
+<input
+id="expenseReason"
+class="goldInput"
+type="text"
+placeholder="Reason for expense">
+
+<button
+id="saveExpenseBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Expense
+
+</button>
+
+</div>
+
+<div class="glassCard">
+
+<h2 style="color:var(--gold);margin-bottom:20px;">
+
+Today's Expenses
+
+</h2>
+
+<div id="expensesList">
+
+<p style="text-align:center;color:#999;">
+
+No expenses recorded.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<section id="reportsPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-chart-column"></i>
+Reports
+</h1>
+
+<p class="pageSubtitle">
+Business performance, sales and inventory reports.
+</p>
+
+<div class="glassCard">
+
+<h2 style="color:var(--gold);margin-bottom:15px;">
+Business Summary
+</h2>
+
+<div id="reportSummaryCards">
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">
+Today's Sales
+</h3>
+
+<h2 id="reportTodaySales">
+KSh 0
+</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">
+Today's Expenses
+</h3>
+
+<h2 id="reportTodayExpenses">
+KSh 0
+</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">
+Gross Profit
+</h3>
+
+<h2 id="reportGrossProfit">
+KSh 0
+</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">
+Inventory Value
+</h3>
+
+<h2 id="reportInventoryValue">
+KSh 0
+</h2>
+
+</div>
+
+<div class="glassCard" style="margin:0;text-align:center;">
+
+<h3 style="color:var(--gold);">
+Low Stock Items
+</h3>
+
+<h2 id="reportLowStock">
+0
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!--==================================================
+SHIFT RECONCILIATION PAGE
+==================================================-->
+
+<section id="shiftPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-clipboard-check"></i>
+Shift Reconciliation
+</h1>
+
+<p class="pageSubtitle">
+Close the shift by reconciling stock, cash, M-Pesa and expenses.
+</p>
+
+<div class="glassCard inventoryCard">
+
+<div
+id="posShiftSection"
+class="glassCard"
+style="margin-bottom:20px;">
+
+<h2 style="color:var(--gold);margin-bottom:20px;">
+Opening Shift
+</h2>
+
+<label>Opening Cash</label>
+
+<input
+id="openingCash"
+class="goldInput"
+type="number"
+placeholder="Cash received from previous cashier">
+
+<label>Opening M-Pesa</label>
+
+<input
+id="openingMpesa"
+class="goldInput"
+type="number"
+placeholder="Opening M-Pesa balance">
+
+<button
+id="startShiftBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-play"></i>
+
+Start Shift
+
+</button>
+
+<hr style="margin:25px 0;border:1px solid rgba(255,255,255,.1);">
+
+<label>Cash Counted</label>
+
+<input
+id="shiftCash"
+class="goldInput"
+type="number"
+placeholder="Cash counted">
+
+</div>
+
+<label>M-Pesa Received</label>
+
+<input
+id="shiftMpesa"
+class="goldInput"
+type="number"
+placeholder="M-Pesa received">
+
+<label>Card Payments</label>
+
+<input
+id="shiftCard"
+class="goldInput"
+type="number"
+placeholder="Card payments">
+
+<label>Expenses</label>
+
+<input
+id="shiftExpenses"
+class="goldInput"
+type="number"
+placeholder="Expenses paid during shift">
+<!--==================================================
+SHIFT RECONCILIATION PRODUCTS
+==================================================-->
+
+<h2 style="
+color:var(--gold);
+margin:30px 0 15px;
+">
+
+Closing Stock Count
+
+</h2>
+
+<p style="
+color:#ccc;
+margin-bottom:20px;
+">
+
+Count the remaining stock for every product before closing the shift.
+
+</p>
+
+<div id="reconciliationSection">
+
+<div id="reconciliationProducts">
+
+<div class="glassCard">
+
+<p style="
+text-align:center;
+color:#999;
+">
+
+Products will appear here...
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!--==================================================
+END SHIFT RECONCILIATION PRODUCTS
+==================================================-->
+<button
+id="closeShiftBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-lock"></i>
+
+Close Shift
+
+</button>
+<div id="shiftResults" class="glassCard" style="display:none;margin-top:20px;">
+
+<h2 style="color:var(--gold);margin-bottom:15px;">
+Shift Summary
+</h2>
+
+<p><strong>Opening Stock Value:</strong> <span id="openingValueResult">0</span></p>
+
+<p><strong>Closing Stock Value:</strong> <span id="closingValueResult">0</span></p>
+
+<p><strong>Total Sales:</strong> <span id="salesResult">0</span></p>
+
+<p><strong>Total Expenses:</strong> <span id="expensesResult">0</span></p>
+
+<p><strong>Expected Cash:</strong> <span id="expectedCash">0</span></p>
+
+<p><strong>Actual Cash:</strong> <span id="actualCash">0</span></p>
+
+<p><strong>Cash Difference:</strong> <span id="cashDifference">0</span></p>
+<p><strong>Reason (if difference exists):</strong> <input id="cashDifferenceReason" class="goldInput" type="text" placeholder="Explain any shortage or excess"></p>
+<p><strong>Gross Profit:</strong> <span id="profitResult">0</span></p>
+
+</div>
+
+</div>
+
+</section>
+<!--==================================================
+SETTINGS PAGE
+==================================================-->
+<!--==================================================
+SALES HISTORY PAGE
+==================================================-->
+
+<section id="salesHistoryPage" class="hidden pageFade">
+
+<h1 class="pageTitle">
+<i class="fa-solid fa-receipt"></i>
+Sales History
+</h1>
+
+<p class="pageSubtitle">
+View completed sales and reprint receipts.
+</p>
+
+<div class="glassCard">
+
+<input
+id="salesHistorySearch"
+class="goldInput"
+type="text"
+placeholder="Search receipt or cashier...">
+
+<select
+id="salesHistoryFilter"
+class="goldInput"
+style="margin-top:15px;">
+
+<option value="all">All Payments</option>
+<option value="Cash">Cash</option>
+<option value="M-Pesa">M-Pesa</option>
+<option value="Card">Card</option>
+
+</select>
+
+</div>
+
+<div class="glassCard">
+
+<div id="salesHistoryList">
+
+<p style="text-align:center;color:#999;">
+No sales found.
+</p>
+
+</div>
+
+</div>
+
+</section>
+<section id="settingsPage" class="hidden pageFade">
+
+    <h1 class="pageTitle">
+        <i class="fa-solid fa-gears"></i>
+        Settings
+    </h1>
+
+    <div class="glassCard inventoryCard">
+
+        <label>Operating Mode</label>
+
+        <select id="operatingMode" class="goldInput">
+            <option value="POS">POS Mode</option>
+            <option value="SHIFT">Shift Reconciliation Mode</option>
+        </select>
+
+        <button id="saveOperatingModeBtn" class="goldBtn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Save Operating Mode
+        </button>
+
+        <hr style="margin:30px 0;">
+
+        <h3 style="color:#d9534f;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Factory Reset
+        </h3>
+
+        <p>
+            This permanently deletes all business data.<br>
+            Only an Administrator can perform this action.
+        </p>
+
+        <button
+            id="factoryResetBtn"
+            class="goldBtn"
+            style="background:#c62828;">
+            <i class="fa-solid fa-trash"></i>
+            Factory Reset
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+</div>
+
+<script type="module">
+
+/*==================================================
+FIREBASE IMPORTS
+==================================================*/
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+getDoc,
+doc,
+setDoc,
+updateDoc,
+deleteDoc,
+serverTimestamp,
+query,
+where,
+orderBy,
+onSnapshot,
+writeBatch
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+/*==================================================
+FIREBASE CONFIG
+==================================================*/
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyCy5j9aOvlQnwa78CeQIwdLU-IJX4Dfjh0",
+
+authDomain: "generation-club-602e6.firebaseapp.com",
+
+projectId: "generation-club-602e6",
+
+storageBucket: "generation-club-602e6.firebasestorage.app",
+
+messagingSenderId: "492245128096",
+
+appId: "1:492245128096:web:e7b80e4b36ddce1f084ac5"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+
+/*==================================================
+GLOBAL VARIABLES
+==================================================*/
+let currentUser = null;
+
+let currentRole = null;
+
+let currentShift = null;
+
+let editingProductId = null;
+let editingEmployeeId = null;
+let operatingMode = "POS";
+/*==================================================
+FIRESTORE COLLECTIONS
+==================================================*/
+/*==================================================
+EMPLOYEE NUMBER GENERATOR
+==================================================*/
+
+async function generateEmployeeNumber(){
+
+    try{
+
+        const counterDoc = doc(db,"counters","employees");
+
+        const counterSnap = await getDoc(counterDoc);
+
+        let lastNumber = 0;
+
+        if(counterSnap.exists()){
+
+            lastNumber = counterSnap.data().lastNumber || 0;
+
+        }
+
+        lastNumber++;
+
+        await setDoc(counterDoc,{
+            lastNumber:lastNumber
+        });
+
+        return "EMP" + String(lastNumber).padStart(3,"0");
+
+    }catch(error){
+
+        alert("Unable to generate Employee Number. Please try again.");
+
+        throw error;
+
+    }
+
+}
+
+const productsRef = collection(db,"products");
+
+const brandsRef = collection(db,"brands");
+
+const categoriesRef = collection(db,"categories");
+
+const suppliersRef = collection(db,"suppliers");
+
+const packageSizesRef = collection(db,"packageSizes");
+
+const employeesRef = collection(db,"employees");
+
+const stockMovementsRef = collection(db,"stockMovements");
+const stockAdjustmentsRef = collection(db,"stockAdjustments");
+const expensesRef = collection(db,"expenses");
+
+const expenseCategoriesRef = collection(db,"expenseCategories");
+
+const shiftsRef = collection(db,"shifts");
+const salesRef = collection(db,"sales");
+const settingsDoc = doc(db,"settings","system");
+/*==================================================
+SAVE STOCK ADJUSTMENT
+==================================================*/
+
+async function saveStockAdjustment(
+    productId,
+    productName,
+    quantity,
+    balance,
+    reason=""
+){
+
+    await addDoc(stockAdjustmentsRef,{
+
+        productId,
+        productName,
+        quantity,
+        balance,
+        reason,
+        createdAt:serverTimestamp()
+
+    });
+
+}
+console.log("Database:", db);
+console.log("Brands Ref:", brandsRef);
+/*==================================================
+SAVE STOCK MOVEMENT
+==================================================*/
+
+async function saveStockMovement(
+    productId,
+    productName,
+    type,
+    quantity,
+    balance,
+    remarks = ""
+){
+
+    await addDoc(stockMovementsRef,{
+    productId,
+    productName,
+    type,
+    quantity,
+    balance,
+    remarks,
+
+    employeeId: currentEmployee?.id || "",
+    employeeName: currentEmployee?.fullName || "",
+    employeeRole: currentEmployee?.role || "",
+
+    createdAt: serverTimestamp()
+});
+
+}
+/*==================================================
+CURRENT LOGGED IN EMPLOYEE
+==================================================*/
+
+let currentEmployee = null;
+
+const countersRef = collection(db,"counters");
+const rolePermissions = {
+
+    Administrator: [
+        "dashboardPage",
+        "posPage",
+        "brandsPage",
+        "categoriesPage",
+        "productsPage",
+        "suppliersPage",
+        "receiveStockPage",
+        "stockMovementsPage",
+        "inventoryPage",
+        "employeesPage",
+        "expensesPage",
+        "expenseCategoriesPage",
+        "shiftPage",
+        "reportsPage",
+        "settingsPage"
+    ],
+
+    Manager: [
+        "dashboardPage",
+        "posPage",
+        "brandsPage",
+        "categoriesPage",
+        "productsPage",
+        "suppliersPage",
+        "receiveStockPage",
+        "stockMovementsPage",
+        "inventoryPage",
+        "employeesPage",
+        "expensesPage",
+        "expenseCategoriesPage",
+        "shiftPage",
+        "reportsPage",
+        "settingsPage"
+    ],
+
+    Cashier: [
+        "dashboardPage",
+        "posPage",
+        "expensesPage",
+        "shiftPage"
+    ]
+
+};
+/*==================================================
+LOAD OPERATING MODE
+==================================================*/
+
+async function loadOperatingMode(){
+
+    const snap = await getDoc(settingsDoc);
+
+    if(snap.exists()){
+
+        operatingMode =
+        snap.data().operatingMode || "POS";
+
+    }else{
+
+        operatingMode = "POS";
+
+    }
+
+    document.getElementById("operatingMode").value =
+    operatingMode;
+
+    const posButton =
+    document.querySelector('[data-page="posPage"]');
+
+    const shiftTitle =
+    document.querySelector("#shiftPage .pageTitle");
+
+    const shiftSubtitle =
+    document.querySelector("#shiftPage .pageSubtitle");
+
+    if(operatingMode === "SHIFT"){
+
+        posButton.style.display = "none";
+
+        shiftTitle.innerHTML =
+        '<i class="fa-solid fa-clipboard-check"></i> Shift Reconciliation';
+
+        shiftSubtitle.textContent =
+        "Manual Stock Reconciliation Mode";
+
+    }else{
+
+        posButton.style.display = "flex";
+
+        shiftTitle.innerHTML =
+        '<i class="fa-solid fa-clipboard-check"></i> Shift';
+
+        shiftSubtitle.textContent =
+        "POS Shift Closing";
+
+    }
+const posShiftSection =
+document.getElementById("posShiftSection");
+
+const reconciliationSection =
+document.getElementById("reconciliationSection");
+
+if(posShiftSection && reconciliationSection){
+
+    if(operatingMode === "SHIFT"){
+
+        posShiftSection.style.display = "none";
+        reconciliationSection.style.display = "block";
+
+    }else{
+
+        posShiftSection.style.display = "block";
+        reconciliationSection.style.display = "none";
+
+    }
+
+}
+}
+/*==================================================
+FACTORY RESET
+==================================================*/
+
+const factoryResetBtn =
+document.getElementById("factoryResetBtn");
+
+factoryResetBtn.onclick = async function(){
+
+    if(!currentEmployee){
+
+        alert("Please login first.");
+
+        return;
+
+    }
+
+ if(currentEmployee.role !== "Administrator"){
+
+    alert("Only an Administrator can perform a Factory Reset.");
+
+    return;
+
+}
+
+    const enteredPin =
+    prompt("Enter your Administrator PIN:");
+
+    if(enteredPin === null){
+
+        return;
+
+    }
+
+    if(enteredPin !== currentEmployee.pin){
+
+        alert("Incorrect Administrator PIN.");
+
+        return;
+
+    }
+
+    const confirmation =
+prompt(
+'Type RESET to permanently delete all business data.'
+);
+
+if(confirmation === null){
+
+    return;
+
+}
+
+if(confirmation !== "RESET"){
+
+    alert("Factory Reset cancelled.");
+
+    return;
+
+}
+
+const collections = [
+    "products",
+    "brands",
+    "categories",
+    "suppliers",
+    "employees",
+    "expenses",
+    "expenseCategories",
+    "sales",
+    "shifts",
+    "stockMovements",
+    "stockAdjustments"
+];
+
+try{
+
+    for(const name of collections){
+
+        const snapshot = await getDocs(collection(db, name));
+
+        const batch = writeBatch(db);
+
+        snapshot.forEach(docSnap=>{
+            batch.delete(docSnap.ref);
+        });
+
+        await batch.commit();
+
+    }
+
+    await setDoc(settingsDoc,{
+        operatingMode:"POS"
+    });
+
+    alert("Factory Reset completed successfully.");
+
+    location.reload();
+
+}catch(error){
+
+    console.error(error);
+
+    alert("Factory Reset failed.\n\n" + error.message);
+
+}
+
+};
+/*==================================================
+LOAD BRAND DROPDOWN
+==================================================*/
+
+async function loadBrandDropdown(){
+
+const snapshot = await getDocs(
+query(brandsRef, orderBy("name"))
+);
+
+const select =
+document.getElementById("productBrand");
+
+select.innerHTML =
+'<option value="">Select Brand</option>';
+
+snapshot.forEach(doc=>{
+
+const brand = doc.data();
+
+select.innerHTML += `
+<option value="${brand.name}">
+${brand.name}
+</option>
+`;
+
+});
+
+}
+
+/*==================================================
+LOAD CATEGORY DROPDOWN
+==================================================*/
+
+async function loadCategoryDropdown(){
+
+const snapshot = await getDocs(
+query(categoriesRef, orderBy("name"))
+);
+
+const select =
+document.getElementById("productCategory");
+
+select.innerHTML =
+'<option value="">Select Category</option>';
+
+snapshot.forEach(doc=>{
+
+const category = doc.data();
+
+select.innerHTML += `
+<option value="${category.name}">
+${category.name}
+</option>
+`;
+
+});
+
+}
+
+/* Stock collections will be rebuilt from scratch */
+
+/*==================================================
+LOAD SUPPLIER DROPDOWN
+==================================================*/
+
+async function loadSupplierDropdown(){
+
+const snapshot = await getDocs(
+query(suppliersRef, orderBy("name"))
+);
+
+const select =
+document.getElementById("productSupplier");
+
+select.innerHTML =
+'<option value="">Select Supplier</option>';
+
+snapshot.forEach(doc=>{
+
+const supplier = doc.data();
+
+select.innerHTML += `
+<option value="${supplier.name}">
+${supplier.name}
+</option>
+`;
+
+});
+
+}
+/*==================================================
+LOAD PRODUCTS
+==================================================*/
+
+async function loadProducts(search=""){
+
+const snapshot = await getDocs(
+query(productsRef, orderBy("name"))
+);
+
+const productsList =
+document.getElementById("productsList");
+
+productsList.innerHTML="";
+
+snapshot.forEach(doc=>{
+
+const product=doc.data();
+
+if(
+search!="" &&
+!product.name.toLowerCase().includes(search.toLowerCase())
+){
+return;
+}
+
+productsList.innerHTML += `
+<div style="
+padding:15px;
+margin-bottom:10px;
+background:#222;
+border:1px solid #D4AF37;
+border-radius:10px;
+">
+
+<b>${product.name}</b><br>
+
+${product.brand} • ${product.category}<br>
+
+${product.packageSize}<br>
+
+KSh ${product.price}
+
+<div style="margin-top:12px;">
+
+<button
+class="goldBtn"
+onclick="editProduct('${doc.id}')">
+
+<i class="fa-solid fa-pen"></i>
+
+Edit
+
+</button>
+
+<button
+class="cancelBtn"
+style="margin-left:10px;"
+onclick="toggleProductStatus('${doc.id}','${product.status || "Active"}')">
+
+${(product.status || "Active")=="Active" ? "Deactivate" : "Activate"}
+
+</button>
+
+</div>
+
+</div>
+`;
+
+});
+
+if(productsList.innerHTML==""){
+
+productsList.innerHTML="No matching products.";
+
+}
+
+}
+
+loadProducts();
+/*==================================================
+LOAD POS PRODUCTS
+==================================================*/
+
+async function loadPosProducts(search=""){
+
+const snapshot = await getDocs(
+query(productsRef, orderBy("name"))
+);
+
+const posProducts =
+document.getElementById("posProducts");
+
+if(!posProducts) return;
+
+posProducts.innerHTML = "";
+
+snapshot.forEach(doc=>{
+
+const product = doc.data();
+
+if((product.status || "Active")!="Active") return;
+
+if(
+search!="" &&
+!product.name.toLowerCase().includes(search.toLowerCase())
+){
+return;
+}
+
+posProducts.innerHTML += `
+
+<div
+class="glassCard"
+onclick="selectPosProduct('${doc.id}')"
+style="
+cursor:pointer;
+padding:18px;
+margin-bottom:15px;
+transition:.2s;
+">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<div>
+
+<h3 style="
+margin:0;
+color:var(--gold);
+">
+
+${product.name}
+
+</h3>
+
+<p style="
+margin-top:6px;
+color:#999;
+">
+
+${product.brand}
+
+</p>
+
+</div>
+
+<div style="
+font-size:22px;
+font-weight:bold;
+color:#fff;
+">
+
+KSh ${Number(product.price).toLocaleString()}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(posProducts.innerHTML==""){
+
+posProducts.innerHTML = `
+<p style="text-align:center;color:#999;">
+No products available.
+</p>`;
+
+}
+
+}
+
+
+/*==================================================
+POS CART
+==================================================*/
+
+let posCart = [];
+
+/*==================================================
+SELECT PRODUCT
+==================================================*/
+
+window.selectPosProduct = async function(id){
+
+    try{
+
+        const productDoc = await getDoc(doc(db,"products",id));
+
+        if(!productDoc.exists()){
+
+            alert("Product not found.");
+            return;
+
+        }
+
+        const product = {
+            id: productDoc.id,
+            ...productDoc.data()
+        };
+
+        if((product.currentStock || 0) <= 0){
+
+            alert("This product is out of stock.");
+            return;
+
+        }
+
+        const existing = posCart.find(item => item.id === product.id);
+
+        if(existing){
+
+            if(existing.quantity >= product.currentStock){
+
+                alert("No more stock available.");
+                return;
+
+            }
+
+            existing.quantity++;
+
+        }else{
+
+            posCart.push({
+
+                id: product.id,
+                name: product.name,
+                price: Number(product.price),
+                quantity: 1,
+                stock: Number(product.currentStock)
+
+            });
+
+        }
+
+        drawCart();
+
+    }catch(error){
+
+        console.error(error);
+        alert(error.message);
+
+    }
+
+};
+
+/*==================================================
+DRAW CART
+==================================================*/
+
+function drawCart(){
+
+    const saleArea =
+    document.getElementById("posCurrentSale");
+
+    const totalArea =
+    document.getElementById("posGrandTotal");
+
+    if(!saleArea || !totalArea) return;
+
+    if(posCart.length===0){
+
+        saleArea.innerHTML=`
+        <p style="text-align:center;color:#999;padding:25px;">
+        Cart is empty.
+        </p>`;
+
+        totalArea.textContent="KSh 0";
+
+        return;
+
+    }
+
+    let html="";
+    let grandTotal=0;
+
+    posCart.forEach(item=>{
+
+        const total=item.price*item.quantity;
+
+        grandTotal+=total;
+
+        html+=`
+
+<div class="glassCard" style="margin-bottom:12px;">
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<div>
+
+<b style="color:var(--gold);">
+
+${item.name}
+
+</b>
+
+<br>
+
+KSh ${item.price.toLocaleString()}
+
+</div>
+
+<div>
+
+<button
+class="goldBtn"
+onclick="changeCartQty('${item.id}',-1)">
+
+−
+
+</button>
+
+<span style="margin:0 10px;font-weight:bold;">
+
+${item.quantity}
+
+</span>
+
+<button
+class="goldBtn"
+onclick="changeCartQty('${item.id}',1)">
+
++
+
+</button>
+
+<button
+class="cancelBtn"
+style="margin-left:10px;"
+onclick="removeCartItem('${item.id}')">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+    });
+
+    saleArea.innerHTML=html;
+
+    totalArea.textContent =
+"KSh " + grandTotal.toLocaleString();
+
+/* Update Balance */
+
+const amountInput =
+document.getElementById("amountReceived");
+
+const balanceArea =
+document.getElementById("balanceDisplay");
+
+if(amountInput && balanceArea){
+
+    const updateBalance = function(){
+
+        const received =
+        Number(amountInput.value || 0);
+
+        const balance =
+        received - grandTotal;
+
+        if(balance >= 0){
+
+            balanceArea.innerHTML =
+            "KSh " + balance.toLocaleString();
+
+            balanceArea.style.color = "#6CFF8F";
+
+        }else{
+
+            balanceArea.innerHTML =
+            "Short KSh " +
+            Math.abs(balance).toLocaleString();
+
+            balanceArea.style.color = "#ff6666";
+
+        }
+
+    };
+
+    amountInput.oninput = updateBalance;
+
+    updateBalance();
+
+}
+
+}
+
+
+/*==================================================
+REMOVE ITEM
+==================================================*/
+
+window.removeCartItem=function(id){
+
+    posCart=posCart.filter(item=>item.id!==id);
+
+    drawCart();
+
+};
+/*==================================================
+CHANGE CART QUANTITY
+==================================================*/
+
+window.changeCartQty = function(id, change){
+
+    const item = posCart.find(p => p.id === id);
+
+    if(!item) return;
+
+    item.quantity += change;
+
+    if(item.quantity <= 0){
+
+        removeCartItem(id);
+        return;
+
+    }
+
+    if(item.quantity > item.stock){
+
+        item.quantity = item.stock;
+        alert("No more stock available.");
+    }
+
+    drawCart();
+
+};
+/*==================================================
+CLEAR CART
+==================================================*/
+
+function clearCart(){
+
+    posCart=[];
+
+    drawCart();
+
+}
+/*==================================================
+CHECKOUT SALE
+==================================================*/
+
+window.checkoutSale = async function(paymentMethod){
+
+    if(!currentEmployee){
+        alert("Please login first.");
+        return;
+    }
+
+    if(!currentEmployee.shiftId){
+        alert("Start a shift before making sales.");
+        return;
+    }
+
+    if(posCart.length===0){
+        alert("Cart is empty.");
+        return;
+    }
+/*==================================================
+CHECK AMOUNT RECEIVED
+==================================================*/
+
+const received =
+Number(document.getElementById("amountReceived").value || 0);
+
+let grandTotal = 0;
+
+for(const item of posCart){
+
+    grandTotal += item.price * item.quantity;
+
+}
+
+if(received < grandTotal){
+
+    alert("Amount received is less than the total bill.");
+
+    return;
+
+}
+    try{
+
+grandTotal = 0;
+        const saleItems = [];
+
+        for(const item of posCart){
+
+            const productRef = doc(db,"products",item.id);
+            const productSnap = await getDoc(productRef);
+
+            if(!productSnap.exists()){
+                throw new Error(item.name + " no longer exists.");
+            }
+
+            const product = productSnap.data();
+            const currentStock = Number(product.currentStock || 0);
+
+            if(currentStock < item.quantity){
+                throw new Error(
+                    item.name + " has only " + currentStock + " remaining."
+                );
+            }
+
+            const newStock = currentStock - item.quantity;
+
+            await updateDoc(productRef,{
+                currentStock:newStock,
+                updatedAt:serverTimestamp()
+            });
+
+            await saveStockMovement(
+                item.id,
+                item.name,
+                "SALE",
+                item.quantity,
+                newStock,
+                paymentMethod + " Sale"
+            );
+
+            const total = item.price * item.quantity;
+            grandTotal += total;
+
+            saleItems.push({
+                productId:item.id,
+                name:item.name,
+                price:item.price,
+                quantity:item.quantity,
+                total:total
+            });
+        }
+
+        await addDoc(salesRef,{
+            employeeId:currentEmployee.id,
+            employeeName:currentEmployee.fullName,
+            employeeNo:currentEmployee.employeeNo,
+            shiftId:currentEmployee.shiftId,
+            paymentMethod,
+            items:saleItems,
+            total:grandTotal,
+            createdAt:serverTimestamp()
+        });
+
+        printReceipt(paymentMethod, grandTotal);
+
+clearCart();
+
+await loadInventory();
+await loadPosProducts();
+
+alert("Sale completed successfully.");
+
+    }catch(error){
+
+        console.error(error);
+        alert(error.message);
+
+    }
+
+};
+/*==================================================
+COMPLETE SALE BUTTON
+==================================================*/
+
+document.getElementById("completePosSaleBtn").onclick = function(){
+
+    const paymentMethod =
+    document.getElementById("posPaymentMethod").value;
+
+    checkoutSale(paymentMethod);
+
+};
+/*==================================================
+PAYMENT BUTTONS
+==================================================*/
+
+window.checkoutCash=function(){
+    checkoutSale("Cash");
+};
+
+window.checkoutMpesa=function(){
+    checkoutSale("M-Pesa");
+};
+
+window.checkoutCard=function(){
+    checkoutSale("Card");
+};
+/*==================================================
+GENERATE RECEIPT NUMBER
+==================================================*/
+
+function generateReceiptNumber(){
+
+    const now = new Date();
+
+    const date =
+    now.getFullYear().toString() +
+    (now.getMonth()+1).toString().padStart(2,"0") +
+    now.getDate().toString().padStart(2,"0");
+
+    const time =
+    now.getTime().toString().slice(-6);
+
+    return "GC-" + date + "-" + time;
+
+}
+/*==================================================
+PRINT RECEIPT
+==================================================*/
+
+function printReceipt(paymentMethod,total){
+
+    const receiptNo =
+    "GC-" + Date.now();
+
+    const received =
+    Number(document.getElementById("amountReceived").value || 0);
+
+    const change =
+    received - total;
+
+    let receipt = "";
+
+    receipt += "=================================\n";
+    receipt += "      GENERATION CLUB\n";
+    receipt += "=================================\n\n";
+
+    receipt += "Receipt : " + receiptNo + "\n";
+    receipt += "Cashier : " + currentEmployee.fullName + "\n";
+    receipt += "Employee: " + currentEmployee.employeeNo + "\n";
+    receipt += "Payment : " + paymentMethod + "\n";
+    receipt += "Date    : " + new Date().toLocaleString() + "\n\n";
+
+    receipt += "---------------------------------\n";
+
+    posCart.forEach(item=>{
+
+        receipt +=
+        item.name + "\n";
+
+        receipt +=
+        item.quantity +
+        " x KSh " +
+        item.price.toLocaleString() +
+        " = KSh " +
+        (item.quantity * item.price).toLocaleString() +
+        "\n\n";
+
+    });
+
+    receipt += "---------------------------------\n";
+
+    receipt +=
+    "TOTAL    : KSh " +
+    total.toLocaleString() +
+    "\n";
+
+    receipt +=
+    "PAID     : KSh " +
+    received.toLocaleString() +
+    "\n";
+
+    receipt +=
+    "CHANGE   : KSh " +
+    change.toLocaleString() +
+    "\n";
+
+    receipt += "=================================\n";
+    receipt += "     THANK YOU. WELCOME AGAIN!\n";
+    receipt += "=================================\n";
+
+    const w = window.open("","Receipt");
+
+    w.document.write(`
+        <pre style="
+            font-family:monospace;
+            font-size:16px;
+            padding:20px;
+        ">${receipt}</pre>
+    `);
+
+    w.document.close();
+
+    w.focus();
+
+    w.print();
+
+}
+
+/*==================================================
+REFRESH POS
+==================================================*/
+
+async function refreshPOS(){
+
+    await loadPosProducts();
+
+    drawCart();
+
+}
+
+/*==================================================
+INITIALIZE POS
+==================================================*/
+
+window.addEventListener("load",async()=>{
+
+    await refreshPOS();
+
+});
+
+
+/*==================================================
+CALCULATE CART TOTAL
+==================================================*/
+function getCartTotal(){
+
+    return posCart.reduce((total, item) => {
+        return total + (item.price * item.quantity);
+    }, 0);
+
+}
+/*==================================================
+LOAD RECEIVE PRODUCTS
+==================================================*/
+
+async function loadReceiveProducts(){
+
+const snapshot = await getDocs(
+query(productsRef, orderBy("name"))
+);
+
+const select =
+document.getElementById("receiveProduct");
+
+select.innerHTML =
+'<option value="">Select Product</option>';
+
+snapshot.forEach(doc=>{
+
+const product = doc.data();
+
+if((product.status || "Active")!="Active") return;
+
+select.innerHTML += `
+<option value="${doc.id}">
+${product.name} (${product.packageSize})
+</option>
+`;
+
+});
+
+}
+
+/*==================================================
+APPLICATION FUNCTIONS
+==================================================*/
+/*==================================================
+INVENTORY FUNCTIONS
+==================================================*/
+
+async function loadInventory(search = ""){
+
+    const snapshot = await getDocs(
+        query(productsRef, orderBy("name"))
+    );
+
+    const inventoryList =
+    document.getElementById("inventoryList");
+
+    inventoryList.innerHTML = "";
+
+    const filterElement =
+document.getElementById("inventoryFilter");
+
+const filter =
+filterElement ? filterElement.value : "all";
+
+    let totalProducts = 0;
+    let totalUnits = 0;
+    let lowStock = 0;
+    let stockValue = 0;
+
+    snapshot.forEach(doc=>{
+
+        const product = doc.data();
+
+        if(
+            search &&
+            !product.name.toLowerCase().includes(search.toLowerCase())
+        ){
+            return;
+        }
+
+        const stock = Number(product.currentStock || 0);
+        const minimum = Number(product.minimumStock || 0);
+        const buyingPrice = Number(product.buyingPrice || 0);
+        const sellingPrice = Number(product.price || 0);
+
+        /* Filter */
+
+        if(filter === "instock" && stock <= 0){
+            return;
+        }
+
+        if(filter === "low" && !(stock > 0 && stock <= minimum)){
+            return;
+        }
+
+        if(filter === "out" && stock > 0){
+            return;
+        }
+
+        totalProducts++;
+        totalUnits += stock;
+        stockValue += stock * buyingPrice;
+
+        let status = "🟢 In Stock";
+
+        if(stock <= 0){
+
+            status = "🔴 Out of Stock";
+
+        }else if(stock <= minimum){
+
+            status = "🟡 Low Stock";
+            lowStock++;
+
+        }
+
+        inventoryList.innerHTML += `
+
+<div class="glassCard" style="margin-bottom:18px;">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:15px;
+    ">
+
+        <h3 style="
+            color:var(--gold);
+            font-size:20px;
+            margin:0;
+        ">
+            ${product.name}
+        </h3>
+
+        <span style="
+            background:rgba(212,175,55,.15);
+            color:var(--gold);
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:12px;
+            font-weight:600;
+        ">
+            ${status}
+        </span>
+
+    </div>
+
+    <div style="
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    ">
+
+        <div>
+            <small style="color:#999;">Current Stock</small>
+            <h2>${stock}</h2>
+        </div>
+
+        <div>
+            <small style="color:#999;">Minimum Stock</small>
+            <h2>${minimum}</h2>
+        </div>
+
+        <div>
+            <small style="color:#999;">Buying Price</small>
+            <h3>KSh ${buyingPrice}</h3>
+        </div>
+
+        <div>
+            <small style="color:#999;">Selling Price</small>
+            <h3>KSh ${sellingPrice}</h3>
+        </div>
+
+    </div>
+
+    <hr style="
+        border:none;
+        border-top:1px solid rgba(255,255,255,.1);
+        margin:15px 0;
+    ">
+
+    <h3 style="color:var(--gold);">
+        Inventory Value: KSh ${(stock * buyingPrice).toLocaleString()}
+    </h3>
+
+</div>
+
+`;
+
+    });
+
+    if(inventoryList.innerHTML === ""){
+
+        inventoryList.innerHTML = `
+        <p style="color:#999;text-align:center;padding:30px;">
+            No products found.
+        </p>`;
+    }
+
+    const summaryProducts = document.getElementById("summaryProducts");
+const summaryUnits = document.getElementById("summaryUnits");
+const summaryValue = document.getElementById("summaryValue");
+const summaryLow = document.getElementById("summaryLow");
+
+if(summaryProducts) summaryProducts.textContent = totalProducts;
+if(summaryUnits) summaryUnits.textContent = totalUnits;
+if(summaryValue) summaryValue.textContent = "KSh " + stockValue.toLocaleString();
+if(summaryLow) summaryLow.textContent = lowStock;
+
+}
+/*==================================================
+INVENTORY FILTER EVENTS
+==================================================*/
+
+const inventorySearch =
+document.getElementById("inventorySearch");
+
+if(inventorySearch){
+
+inventorySearch.oninput = function(){
+
+loadInventory(this.value);
+
+};
+
+}
+
+const inventoryFilter =
+document.getElementById("inventoryFilter");
+
+if(inventoryFilter){
+
+inventoryFilter.onchange = function(){
+
+const search =
+document.getElementById("inventorySearch").value;
+
+loadInventory(search);
+
+};
+
+}
+/*==================================================
+LOAD STOCK MOVEMENTS
+==================================================*/
+
+async function loadStockMovements(){
+
+const container =
+document.getElementById("stockMovementsList");
+
+if(!container) return;
+
+container.innerHTML =
+"<p style='color:#999;text-align:center;'>Loading...</p>";
+
+try{
+
+const snapshot =
+await getDocs(
+query(
+stockMovementsRef,
+orderBy("createdAt","desc")
+)
+);
+
+if(snapshot.empty){
+
+container.innerHTML=
+"<p style='color:#999;text-align:center;'>No stock movements available.</p>";
+
+return;
+
+}
+
+let html="";
+
+snapshot.forEach(docItem=>{
+
+const data=docItem.data();
+
+let date="";
+
+if(data.createdAt){
+
+date=
+data.createdAt
+.toDate()
+.toLocaleString();
+
+}
+
+html+=`
+
+<div class="glassCard" style="margin-bottom:12px;">
+
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+
+<strong style="color:var(--gold);">
+${data.productName || "-"}
+</strong>
+
+<span>
+${date}
+</span>
+
+</div>
+
+<div style="margin-top:8px;">
+
+Movement:
+<b>${data.type}</b>
+
+</div>
+
+<div>
+
+Quantity:
+${data.quantity}
+
+</div>
+
+<div>
+
+Balance:
+${data.balance}
+
+</div>
+
+<div>
+
+Employee:
+${data.employeeName || "Unknown"}
+
+</div>
+
+<div>
+
+Remarks:
+${data.remarks || "-"}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+container.innerHTML=html;
+
+}catch(error){
+
+container.innerHTML=
+"<p style='color:red;text-align:center;'>Failed to load stock movements.</p>";
+
+console.error(error);
+
+}
+
+}
+/*==================================================
+LOAD REPORT SUMMARY
+==================================================*/
+
+async function loadReportSummary(){
+
+try{
+
+let todaySales = 0;
+let todayExpenses = 0;
+let inventoryValue = 0;
+let inventoryCost = 0;
+let grossProfit = 0;
+let lowStock = 0;
+
+/* Today's Sales */
+
+const salesSnapshot =
+await getDocs(salesRef);
+
+const today = new Date();
+
+today.setHours(0,0,0,0);
+
+salesSnapshot.forEach(docItem=>{
+
+    const data = docItem.data();
+
+    if(!data.createdAt) return;
+
+    const saleDate =
+    data.createdAt.toDate();
+
+    saleDate.setHours(0,0,0,0);
+
+    if(saleDate.getTime() === today.getTime()){
+
+        todaySales +=
+        Number(data.total || 0);
+
+    }
+
+});
+
+/* Expenses */
+
+const expenseSnapshot =
+await getDocs(expensesRef);
+
+expenseSnapshot.forEach(docItem=>{
+
+    const data = docItem.data();
+
+    if(!data.createdAt) return;
+
+    const expenseDate = data.createdAt.toDate();
+
+    expenseDate.setHours(0,0,0,0);
+
+    if(expenseDate.getTime() === today.getTime()){
+
+        todayExpenses += Number(data.amount || 0);
+
+    }
+
+});
+
+/* Inventory */
+
+const inventorySnapshot =
+await getDocs(productsRef);
+
+inventorySnapshot.forEach(docItem=>{
+
+const data = docItem.data();
+
+const stock =
+Number(data.currentStock || 0);
+
+const cost =
+Number(data.buyingPrice || 0);
+
+const selling =
+Number(data.price || 0);
+
+inventoryValue += stock * selling;
+
+inventoryCost += stock * cost;
+
+if(stock <= Number(data.minimumStock || 0)){
+
+    lowStock++;
+
+}
+
+}
+
+});
+grossProfit =
+todaySales - inventoryCost - todayExpenses;
+
+document.getElementById("reportGrossProfit").textContent =
+"KSh " + grossProfit.toLocaleString();
+document.getElementById("reportTodaySales").textContent =
+"KSh " + todaySales.toLocaleString();
+
+document.getElementById("reportTodayExpenses").textContent =
+"KSh " + todayExpenses.toLocaleString();
+
+document.getElementById("reportInventoryValue").textContent =
+"KSh " + inventoryValue.toLocaleString();
+
+document.getElementById("reportLowStock").textContent =
+lowStock;
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+/*==================================================
+LOAD SALES HISTORY
+==================================================*/
+
+async function loadSalesHistory(){
+
+    const list =
+    document.getElementById("salesHistoryList");
+
+    if(!list) return;
+
+    list.innerHTML =
+    "<p style='text-align:center;'>Loading...</p>";
+
+    try{
+
+        const snapshot =
+        await getDocs(salesRef);
+
+        if(snapshot.empty){
+
+            list.innerHTML = `
+            <p style="text-align:center;color:#999;">
+            No sales found.
+            </p>`;
+
+            return;
+
+        }
+
+        let html = "";
+
+        const sales = [];
+
+        snapshot.forEach(docItem=>{
+
+            sales.push({
+                id:docItem.id,
+                ...docItem.data()
+            });
+
+        });
+
+        sales.sort((a,b)=>{
+
+            if(!a.createdAt || !b.createdAt) return 0;
+
+            return b.createdAt.seconds -
+                   a.createdAt.seconds;
+
+        });
+
+        sales.forEach(sale=>{
+
+            html += `
+
+<div class="glassCard" style="margin-bottom:15px;">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:10px;
+">
+
+<div>
+
+<b style="color:var(--gold);">
+${sale.employeeName}
+</b>
+
+<br>
+
+${sale.paymentMethod}
+
+<br>
+
+${sale.createdAt
+? sale.createdAt.toDate().toLocaleString()
+: "-"}
+
+</div>
+
+<div style="text-align:right;">
+
+<div style="
+font-size:20px;
+font-weight:bold;
+color:var(--gold);
+">
+
+KSh ${Number(sale.total || 0).toLocaleString()}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+        });
+
+        list.innerHTML = html;
+
+    }catch(error){
+
+        console.error(error);
+
+        list.innerHTML = `
+        <p style="text-align:center;color:red;">
+        Failed to load sales.
+        </p>`;
+
+    }
+
+}
+/*==================================================
+LOAD RECONCILIATION PRODUCTS
+==================================================*/
+
+async function loadReconciliationProducts(){
+
+const snapshot = await getDocs(
+query(productsRef, orderBy("name"))
+);
+
+const container =
+document.getElementById("reconciliationProducts");
+
+container.innerHTML = "";
+
+if(snapshot.empty){
+
+container.innerHTML = `
+
+<div class="glassCard">
+
+<p style="text-align:center;color:#999;">
+
+No products found.
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const product = doc.data();
+
+container.innerHTML += `
+
+<div class="glassCard" style="margin-bottom:15px;">
+
+<h3 style="color:var(--gold);margin-bottom:15px;">
+
+${product.name}
+
+</h3>
+
+<p>
+
+Opening Stock:
+<strong>${product.currentStock || 0}</strong>
+
+</p>
+
+<label style="margin-top:15px;display:block;">
+
+Closing Stock Count
+
+</label>
+
+<input
+type="number"
+class="goldInput reconciliationCount"
+data-id="${doc.id}"
+data-name="${product.name}"
+data-opening="${product.currentStock || 0}"
+data-buying="${product.buyingPrice || 0}"
+data-selling="${product.price || 0}"
+placeholder="Enter remaining stock">
+
+</div>
+
+`;
+
+});
+
+}
+/*==================================================
+LOGIN
+==================================================*/
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+loginBtn.onclick = async function(){
+
+const employeeNo =
+document.getElementById("loginEmployeeNo").value.trim();
+
+const pin =
+document.getElementById("loginPin").value.trim();
+
+if(employeeNo==""){
+
+alert("Enter Employee Number.");
+
+return;
+
+}
+
+if(pin==""){
+
+alert("Enter PIN.");
+
+return;
+
+}
+
+const q = query(
+employeesRef,
+where("employeeNo","==",employeeNo),
+where("pin","==",pin),
+where("status","==","Active")
+);
+
+let snapshot;
+
+try{
+
+snapshot = await getDocs(q);
+
+}catch(error){
+
+alert("Unable to connect to the server. Please check your internet connection and try again.");
+
+return;
+
+}
+
+if(snapshot.empty){
+
+alert("Invalid Employee Number or PIN.");
+
+return;
+
+}
+
+let employee = null;
+
+snapshot.forEach(docSnap=>{
+
+employee = {
+id:docSnap.id,
+...docSnap.data()
+};
+
+});
+
+currentEmployee = {
+
+id:employee.id,
+employeeNo:employee.employeeNo,
+fullName:employee.fullName,
+role:employee.role,
+pin:employee.pin,
+status:employee.status,
+shiftId:"",
+loggedIn:true
+
+};
+const saveModeBtn = document.getElementById("saveOperatingModeBtn");
+
+saveModeBtn.style.display =
+(currentEmployee.role === "Admin" || currentEmployee.role === "Manager")
+? "block"
+: "none";
+document.getElementById("loginPage").classList.add("hidden");
+
+document.getElementById("app").classList.remove("hidden");
+
+document.getElementById("app").classList.add("pageFade");
+document.getElementById("loggedUser").textContent =
+`${currentEmployee.fullName} (${currentEmployee.role})`;
+await loadOperatingMode();
+/*==================================================
+APPLY ROLE PERMISSIONS
+==================================================*/
+
+currentRole = currentEmployee.role;
+
+document.querySelectorAll(".menuBtn").forEach(button=>{
+
+    const page = button.dataset.page;
+
+    if(
+        rolePermissions[currentRole] &&
+        rolePermissions[currentRole].includes(page)
+    ){
+
+        button.style.display = "flex";
+
+    }else{
+
+        button.style.display = "none";
+
+    }
+
+});
+/* Load any existing open shift */
+try{
+
+await checkOpenShift();
+
+}catch(error){
+
+console.error("Failed to load shift:", error);
+
+}
+
+return;
+
+};
+
+/*==================================================
+MENU NAVIGATION
+==================================================*/
+
+const menuButtons =
+document.querySelectorAll(".menuBtn");
+
+const pages =
+document.querySelectorAll(".contentArea section");
+console.log("Pages found:", pages.length);
+menuButtons.forEach(button=>{
+
+button.onclick = async function(){
+
+menuButtons.forEach(btn=>{
+
+btn.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+pages.forEach(page=>{
+
+console.log("Hiding:", page.id);
+
+page.classList.add("hidden");
+
+});
+
+const pageId = button.dataset.page;
+// Check role permission
+if (
+    currentRole &&
+    rolePermissions[currentRole] &&
+    !rolePermissions[currentRole].includes(pageId)
+) {
+
+    alert("Access denied.");
+
+    return;
+
+}
+const currentPage =
+document.getElementById(pageId);
+console.log("Opening page:", pageId);
+console.log(currentPage);
+currentPage.classList.remove("hidden");
+if(
+pageId === "posPage" &&
+operatingMode === "SHIFT"
+){
+
+alert("POS is disabled. The system is currently in Shift Reconciliation Mode.");
+
+document.getElementById("dashboardPage").classList.remove("hidden");
+
+button.classList.remove("active");
+
+document.querySelector('[data-page="dashboardPage"]').classList.add("active");
+
+return;
+
+}
+currentPage.classList.remove("pageFade");
+
+void currentPage.offsetWidth;
+
+currentPage.classList.add("pageFade");
+
+/* Load Inventory */
+if(pageId === "inventoryPage"){
+    loadInventory();
+}
+/*==================================================
+LOAD REPORTS
+==================================================*/
+
+if(pageId === "reportsPage"){
+
+    await loadReportSummary();
+
+}
+if(pageId === "salesHistoryPage"){
+
+    await loadSalesHistory();
+
+}
+/*==================================================
+LOAD STOCK MOVEMENTS
+==================================================*/
+
+if(pageId === "stockMovementsPage"){
+
+    await loadStockMovements();
+
+}
+/*==================================================
+LOAD SHIFT RECONCILIATION
+==================================================*/
+
+if(pageId === "shiftPage"){
+
+    loadReconciliationProducts();
+
+}
+if(pageId === "employeesPage"){
+
+    document.getElementById("employeeNumber").value =
+        await generateEmployeeNumber();
+
+    loadEmployees();
+
+}
+};
+
+});
+
+
+
+/*==================================================
+PRODUCT MODAL
+==================================================*/
+
+const btnNewProduct =
+document.getElementById("btnNewProduct");
+
+const productModal =
+document.getElementById("productModal");
+
+const closeProductBtn =
+document.getElementById("closeProductBtn");
+
+btnNewProduct.onclick = async function(){
+
+editingProductId = null;
+
+document.getElementById("productName").value = "";
+document.getElementById("productBrand").value = "";
+document.getElementById("manualBrand").value = "";
+document.getElementById("productCategory").value = "";
+document.getElementById("manualCategory").value = "";
+document.getElementById("productPackage").value = "";
+document.getElementById("manualPackage").value = "";
+document.getElementById("productSupplier").value = "";
+document.getElementById("manualSupplier").value = "";
+document.getElementById("buyPrice").value = "";
+document.getElementById("sellPrice").value = "";
+document.getElementById("minimumStock").value = "";
+document.getElementById("barcode").value = "";
+
+await loadBrandDropdown();
+await loadCategoryDropdown();
+await loadSupplierDropdown();
+
+productModal.classList.remove("hidden");
+productModal.classList.add("pageFade");
+
+};
+closeProductBtn.onclick=function(){
+
+editingProductId = null;
+
+document.getElementById("productName").value = "";
+document.getElementById("productBrand").value = "";
+document.getElementById("manualBrand").value = "";
+document.getElementById("productCategory").value = "";
+document.getElementById("manualCategory").value = "";
+document.getElementById("productPackage").value = "";
+document.getElementById("manualPackage").value = "";
+document.getElementById("productSupplier").value = "";
+document.getElementById("manualSupplier").value = "";
+document.getElementById("buyPrice").value = "";
+document.getElementById("sellPrice").value = "";
+document.getElementById("minimumStock").value = "";
+document.getElementById("barcode").value = "";
+
+productModal.classList.add("hidden");
+
+};
+/*==================================================
+BRAND MODAL
+==================================================*/
+
+const btnNewBrand =
+document.getElementById("btnNewBrand");
+
+const brandModal =
+document.getElementById("brandModal");
+
+const closeBrandBtn =
+document.getElementById("closeBrandBtn");
+
+btnNewBrand.onclick=function(){
+
+brandModal.classList.remove("hidden");
+
+brandModal.style.display="flex";
+
+brandModal.classList.add("pageFade");
+
+};
+
+closeBrandBtn.onclick=function(){
+
+brandModal.classList.add("hidden");
+
+};
+
+/*==================================================
+CATEGORY MODAL
+==================================================*/
+
+const btnNewCategory =
+document.getElementById("btnNewCategory");
+
+const categoryModal =
+document.getElementById("categoryModal");
+
+const closeCategoryBtn =
+document.getElementById("closeCategoryBtn");
+
+btnNewCategory.onclick=function(){
+
+categoryModal.classList.remove("hidden");
+
+categoryModal.style.display="flex";
+
+categoryModal.classList.add("pageFade");
+
+};
+
+closeCategoryBtn.onclick=function(){
+
+categoryModal.classList.add("hidden");
+
+};
+/*==================================================
+SUPPLIER MODAL
+==================================================*/
+
+const btnNewSupplier =
+document.getElementById("btnNewSupplier");
+
+const supplierModal =
+document.getElementById("supplierModal");
+
+const closeSupplierBtn =
+document.getElementById("closeSupplierBtn");
+
+btnNewSupplier.onclick=function(){
+
+supplierModal.classList.remove("hidden");
+
+supplierModal.style.display="flex";
+
+supplierModal.classList.add("pageFade");
+
+};
+
+closeSupplierBtn.onclick=function(){
+
+supplierModal.classList.add("hidden");
+
+};
+/*==================================================
+EXPENSE CATEGORY MODAL
+==================================================*/
+const newExpenseCategoryBtn =
+document.getElementById("newExpenseCategoryBtn");
+
+newExpenseCategoryBtn.onclick = function(){
+
+expenseCategoryModal.classList.remove("hidden");
+
+expenseCategoryModal.style.display = "flex";
+
+expenseCategoryModal.classList.add("pageFade");
+
+};
+
+
+document.getElementById("closeExpenseCategoryBtn");
+
+const saveExpenseCategoryBtn =
+document.getElementById("saveExpenseCategoryBtn");
+
+const closeExpenseCategoryBtn =
+document.getElementById("closeExpenseCategoryBtn");
+
+closeExpenseCategoryBtn.onclick = function(){
+
+    expenseCategoryModal.classList.add("hidden");
+
+};
+
+saveExpenseCategoryBtn.onclick = async function(){
+
+const name =
+document.getElementById("expenseCategoryName").value.trim();
+
+if(name==""){
+
+alert("Enter expense type.");
+
+return;
+
+}
+
+const existing = query(
+expenseCategoriesRef,
+where("name","==",name)
+);
+
+const snapshot = await getDocs(existing);
+
+if(!snapshot.empty){
+
+alert("Expense type already exists.");
+
+return;
+
+}
+
+await addDoc(expenseCategoriesRef,{
+
+name,
+createdAt:serverTimestamp()
+
+});
+
+document.getElementById("expenseCategoryName").value="";
+
+expenseCategoryModal.classList.add("hidden");
+
+await loadExpenseCategories();
+
+alert("Expense type saved successfully.");
+
+};
+
+/*==================================================
+FIREBASE CONNECTION TEST
+==================================================*/
+
+console.log("Firebase Connected");
+
+console.log(db);
+/*==================================================
+LOAD BRANDS
+==================================================*/
+
+async function loadBrands(){
+
+const q = query(brandsRef, orderBy("name"));
+
+const snapshot = await getDocs(q);
+
+const brandsList =
+document.getElementById("brandsList");
+
+brandsList.innerHTML = "";
+
+if(snapshot.empty){
+
+brandsList.innerHTML = "No brands added.";
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const brand = doc.data();
+
+brandsList.innerHTML += `
+<div style="
+padding:15px;
+margin-bottom:10px;
+background:#222;
+border:1px solid #D4AF37;
+border-radius:10px;
+">
+${brand.name}
+</div>
+`;
+
+});
+
+}
+
+loadBrands();
+loadBrandDropdown();
+loadOperatingMode();
+/*==================================================
+SAVE BRAND
+==================================================*/
+/*==================================================
+SAVE OPERATING MODE
+==================================================*/
+
+document.getElementById("saveOperatingModeBtn").onclick = async function(){
+if(
+currentEmployee.role !== "Manager" &&
+currentEmployee.role !== "Admin"
+){
+    alert("Only a Manager or Admin can change the operating mode.");
+    return;
+}
+await setDoc(settingsDoc,{
+
+operatingMode:
+document.getElementById("operatingMode").value
+
+})
+await loadOperatingMode();;
+
+alert("Operating mode saved successfully.");
+
+};
+const saveBrandBtn =
+document.getElementById("saveBrandBtn");
+
+saveBrandBtn.onclick = async function(){
+
+const name =
+document.getElementById("brandName").value.trim();
+console.log("Brand Name:", name);
+if(name==""){
+
+alert("Enter brand name");
+
+return;
+
+}
+
+try{
+
+console.log("About to save to Firestore...");
+
+const existing = query(
+brandsRef,
+where("name","==",name)
+);
+
+const snapshot = await getDocs(existing);
+
+if(!snapshot.empty){
+alert("This brand already exists.");
+return;
+}
+
+await addDoc(brandsRef,{
+name:name,
+createdAt:serverTimestamp()
+});
+
+document.getElementById("brandName").value="";
+
+brandModal.classList.add("hidden");
+await loadBrands();
+await loadBrandDropdown();
+loadCategoryDropdown();
+alert("Brand saved successfully.");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+/*==================================================
+LOAD SUPPLIERS
+==================================================*/
+/*==================================================
+LOAD EXPENSE CATEGORIES
+==================================================*/
+
+async function loadExpenseCategories(){
+
+const snapshot = await getDocs(
+query(expenseCategoriesRef, orderBy("name"))
+);
+
+const select =
+document.getElementById("expenseCategory");
+
+if(!select) return;
+
+select.innerHTML =
+'<option value="">Select Expense Type</option>';
+
+snapshot.forEach(doc=>{
+
+const category = doc.data();
+
+select.innerHTML += `
+<option value="${category.name}">
+${category.name}
+</option>
+`;
+
+});
+
+}
+async function loadSuppliers(){
+
+const q = query(suppliersRef, orderBy("name"));
+
+const snapshot = await getDocs(q);
+
+const suppliersList =
+document.getElementById("suppliersList");
+
+suppliersList.innerHTML = "";
+
+if(snapshot.empty){
+
+suppliersList.innerHTML = "No suppliers added.";
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const supplier = doc.data();
+
+suppliersList.innerHTML += `
+<div style="
+padding:15px;
+margin-bottom:10px;
+background:#222;
+border:1px solid #D4AF37;
+border-radius:10px;
+">
+${supplier.name}
+</div>
+`;
+
+});
+
+}
+
+loadSuppliers();
+/*==================================================
+LOAD CATEGORIES
+==================================================*/
+
+async function loadCategories(){
+
+const q = query(categoriesRef, orderBy("name"));
+
+const snapshot = await getDocs(q);
+
+const categoriesList =
+document.getElementById("categoriesList");
+
+categoriesList.innerHTML = "";
+
+if(snapshot.empty){
+
+categoriesList.innerHTML = "No categories added.";
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const category = doc.data();
+
+categoriesList.innerHTML += `
+<div style="
+padding:15px;
+margin-bottom:10px;
+background:#222;
+border:1px solid #D4AF37;
+border-radius:10px;
+">
+${category.name}
+</div>
+`;
+
+});
+
+}
+
+loadCategories();
+loadSupplierDropdown();
+loadReceiveProducts();
+loadInventory();
+loadExpenseCategories();
+loadExpenses();
+// loadStockReceipts();
+/*==================================================
+SAVE CATEGORY
+==================================================*/
+
+const saveCategoryBtn =
+document.getElementById("saveCategoryBtn");
+
+saveCategoryBtn.onclick = async function(){
+
+const name =
+document.getElementById("categoryName").value.trim();
+
+if(name==""){
+
+alert("Enter category name");
+
+return;
+
+}
+
+try{
+
+const existing = query(
+categoriesRef,
+where("name","==",name)
+);
+
+const snapshot = await getDocs(existing);
+
+if(!snapshot.empty){
+
+alert("This category already exists.");
+
+return;
+
+}
+
+await addDoc(categoriesRef,{
+name:name,
+createdAt:serverTimestamp()
+});
+
+document.getElementById("categoryName").value="";
+
+categoryModal.classList.add("hidden");
+
+await loadCategories();
+await loadCategoryDropdown();
+
+alert("Category saved successfully.");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+/*==================================================
+SAVE SUPPLIER
+==================================================*/
+
+const saveSupplierBtn =
+document.getElementById("saveSupplierBtn");
+
+saveSupplierBtn.onclick = async function(){
+
+const name =
+document.getElementById("supplierName").value.trim();
+
+if(name==""){
+
+alert("Enter supplier name");
+
+return;
+
+}
+
+try{
+
+const existing = query(
+suppliersRef,
+where("name","==",name)
+);
+
+const snapshot = await getDocs(existing);
+
+if(!snapshot.empty){
+
+alert("This supplier already exists.");
+
+return;
+
+}
+
+await addDoc(suppliersRef,{
+name:name,
+createdAt:serverTimestamp()
+});
+
+document.getElementById("supplierName").value="";
+
+supplierModal.classList.add("hidden");
+
+await loadSuppliers();
+await loadSupplierDropdown();
+alert("Supplier saved successfully.");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+
+/*==================================================
+LOAD EMPLOYEES
+==================================================*/
+
+async function loadEmployees(){
+
+let snapshot;
+
+try{
+
+snapshot = await getDocs(employeesRef);
+
+}catch(error){
+
+alert("Unable to load employees.");
+
+return;
+
+}
+
+const employeeList =
+document.getElementById("employeeList");
+
+employeeList.innerHTML = "";
+
+if(snapshot.empty){
+
+employeeList.innerHTML = `
+<p style="text-align:center;color:#999;">
+No employees added.
+</p>`;
+
+return;
+
+}
+
+snapshot.forEach(docSnap=>{
+
+const employee = {
+id:docSnap.id,
+...docSnap.data()
+};
+
+employeeList.innerHTML += `
+
+<div style="
+background:#222;
+border:1px solid #D4AF37;
+border-radius:12px;
+padding:15px;
+margin-bottom:12px;
+">
+
+<b style="color:#D4AF37;">
+${employee.fullName}
+</b>
+
+<br>
+
+Employee No:
+${employee.employeeNo}
+
+<br>
+
+Role:
+${employee.role}
+
+<br>
+
+Status:
+${employee.status}
+
+<hr style="
+border:0;
+border-top:1px solid #444;
+margin:12px 0;
+">
+
+<button
+class="goldBtn"
+onclick="editEmployee('${employee.id}')">
+Edit
+</button>
+
+${
+employee.status==="Active"
+?
+`<button
+class="goldBtn"
+onclick="toggleEmployeeStatus('${employee.id}','Inactive')">
+Deactivate
+</button>`
+:
+`<button
+class="goldBtn"
+onclick="toggleEmployeeStatus('${employee.id}','Active')">
+Activate
+</button>`
+}
+
+</div>
+
+`;
+
+});
+
+}
+/*==================================================
+SAVE EMPLOYEE
+==================================================*/
+
+document.getElementById("saveEmployeeBtn").onclick = async function(){
+
+    const fullName = document.getElementById("employeeName").value.trim();
+    let employeeNo = document.getElementById("employeeNumber").value.trim();
+    const role = document.getElementById("employeeRole").value;
+    const pin = document.getElementById("employeePin").value.trim();
+    const status = document.getElementById("employeeStatus").value;
+
+    if(fullName === ""){
+        alert("Enter employee name.");
+        return;
+    }
+
+    if(role === ""){
+        alert("Select employee role.");
+        return;
+    }
+
+    if(!/^\d{4,6}$/.test(pin)){
+    alert("PIN must be 4-6 digits.");
+    return;
+}
+
+    try{
+
+        if(employeeNo === ""){
+            employeeNo = await generateEmployeeNumber();
+        }
+if(!editingEmployeeId){
+
+    const existingEmployee = await getDocs(
+    query(
+        employeesRef,
+        where("employeeNo","==",employeeNo)
+    )
+);
+
+if(
+    !editingEmployeeId &&
+    !existingEmployee.empty
+){
+    alert("Employee Number already exists.");
+    return;
+}
+
+}
+        if(editingEmployeeId){
+
+    await updateDoc(doc(db,"employees",editingEmployeeId),{
+    fullName,
+    employeeNo,
+    role,
+    pin,
+    status,
+    updatedAt: serverTimestamp()
+});
+
+}else{
+
+    await addDoc(employeesRef,{
+    fullName,
+    employeeNo,
+    role,
+    pin,
+    status,
+    createdAt:serverTimestamp(),
+    createdBy: currentEmployee.employeeNo,
+    createdByRole: currentEmployee.role
+});
+
+}
+
+        alert("Employee saved successfully.");
+
+        document.getElementById("employeeName").value = "";
+        document.getElementById("employeeNumber").value = "";
+        document.getElementById("employeeRole").value = "";
+        document.getElementById("employeePin").value = "";
+        document.getElementById("employeeStatus").value = "Active";
+editingEmployeeId = null;
+        await loadEmployees();
+
+    }catch(error){
+
+        alert(error.message);
+
+    }
+
+};
+/*==================================================
+PRODUCT SEARCH
+==================================================*/
+
+document
+.getElementById("productSearch")
+.oninput=function(){
+
+loadProducts(this.value);
+
+};
+/*==================================================
+INVENTORY SEARCH & FILTER
+==================================================*/
+
+/*==================================================
+EDIT PRODUCT
+==================================================*/
+
+window.editProduct = async function(id){
+
+try{
+
+const productDoc =
+await getDoc(doc(db,"products",id));
+
+if(!productDoc.exists()){
+
+alert("Product not found.");
+
+return;
+
+}
+
+const data = productDoc.data();
+
+editingProductId = id;
+await loadBrandDropdown();
+await loadCategoryDropdown();
+await loadSupplierDropdown();
+document.getElementById("productName").value = data.name || "";
+document.getElementById("productBrand").value = data.brand || "";
+document.getElementById("productCategory").value = data.category || "";
+document.getElementById("productPackage").value = data.packageSize || "";
+document.getElementById("productSupplier").value = data.supplier || "";
+document.getElementById("buyPrice").value = data.buyingPrice || "";
+document.getElementById("sellPrice").value = data.price || "";
+document.getElementById("minimumStock").value = data.minimumStock || "";
+document.getElementById("barcode").value = data.barcode || "";
+
+productModal.classList.remove("hidden");
+productModal.style.display = "flex";
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+/*==================================================
+TOGGLE EMPLOYEE STATUS
+==================================================*/
+
+window.toggleEmployeeStatus = async function(id,status){
+
+try{
+
+await updateDoc(doc(db,"employees",id),{
+
+status:status
+
+});
+
+alert("Employee status updated successfully.");
+
+await loadEmployees();
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+/*==================================================
+EDIT EMPLOYEE
+==================================================*/
+
+window.editEmployee = async function(id){
+
+try{
+
+const employeeDoc = await getDoc(doc(db,"employees",id));
+
+if(!employeeDoc.exists()){
+
+alert("Employee not found.");
+
+return;
+
+}
+
+const employee = employeeDoc.data();
+
+editingEmployeeId = id;
+
+document.getElementById("employeeName").value =
+employee.fullName || "";
+
+document.getElementById("employeeNumber").value =
+employee.employeeNo || "";
+
+document.getElementById("employeeRole").value =
+employee.role || "";
+
+document.getElementById("employeePin").value =
+employee.pin || "";
+
+document.getElementById("employeeStatus").value =
+employee.status || "Active";
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+/*==================================================
+TOGGLE PRODUCT STATUS
+==================================================*/
+
+window.toggleProductStatus = async function(id,status){
+
+const newStatus =
+status=="Active" ? "Inactive" : "Active";
+
+await updateDoc(doc(db,"products",id),{
+
+status:newStatus,
+
+updatedAt:serverTimestamp()
+
+});
+
+await loadProducts();
+await loadReceiveProducts();
+await loadInventory();
+
+alert("Product updated successfully.");
+
+};
+/*==================================================
+SAVE PRODUCT
+==================================================*/
+
+const saveProductBtn =
+document.getElementById("saveProductBtn");
+
+saveProductBtn.onclick = async function(){
+
+const name =
+document.getElementById("productName").value.trim();
+
+const brand =
+document.getElementById("manualBrand").value.trim() ||
+document.getElementById("productBrand").value;
+
+const category =
+document.getElementById("manualCategory").value.trim() ||
+document.getElementById("productCategory").value;
+
+const packageSize =
+document.getElementById("manualPackage").value.trim() ||
+document.getElementById("productPackage").value;
+
+const supplier =
+document.getElementById("manualSupplier").value.trim() ||
+document.getElementById("productSupplier").value;
+
+const buyingPrice =
+Number(document.getElementById("buyPrice").value);
+
+const sellingPrice =
+Number(document.getElementById("sellPrice").value);
+
+const minimumStock =
+Number(document.getElementById("minimumStock").value);
+
+const barcode =
+document.getElementById("barcode").value.trim();
+
+if(name==""){
+
+alert("Enter product name");
+
+return;
+
+}
+
+try{
+
+if(editingProductId){
+
+await updateDoc(doc(db,"products",editingProductId),{
+
+name,
+brand,
+category,
+packageSize,
+supplier,
+buyingPrice,
+price:sellingPrice,
+minimumStock,
+barcode,
+updatedAt:serverTimestamp()
+
+});
+
+editingProductId = null;
+
+productModal.classList.add("hidden");
+
+document.getElementById("productName").value = "";
+document.getElementById("manualBrand").value = "";
+document.getElementById("productBrand").value = "";
+document.getElementById("manualCategory").value = "";
+document.getElementById("productCategory").value = "";
+document.getElementById("manualPackage").value = "";
+document.getElementById("productPackage").value = "";
+document.getElementById("manualSupplier").value = "";
+document.getElementById("productSupplier").value = "";
+document.getElementById("buyPrice").value = "";
+document.getElementById("sellPrice").value = "";
+document.getElementById("minimumStock").value = "";
+document.getElementById("barcode").value = "";
+
+await loadProducts();
+await loadReceiveProducts();
+await loadInventory();
+
+alert("Product updated successfully.");
+
+return;
+}
+
+const existing = query(
+productsRef,
+where("name","==",name)
+);
+
+const snapshot = await getDocs(existing);
+
+if(!snapshot.empty){
+
+alert("This product already exists.");
+
+return;
+
+}
+
+await addDoc(productsRef,{
+
+    name,
+    brand,
+    category,
+    packageSize,
+    supplier,
+    buyingPrice,
+    price:sellingPrice,
+    minimumStock,
+    openingStock:0,
+    currentStock:0,
+    barcode,
+    status:"Active",
+    createdAt:serverTimestamp()
+
+});
+
+editingProductId = null;
+
+document.getElementById("productName").value = "";
+document.getElementById("productBrand").value = "";
+document.getElementById("manualBrand").value = "";
+document.getElementById("productCategory").value = "";
+document.getElementById("manualCategory").value = "";
+document.getElementById("productPackage").value = "";
+document.getElementById("manualPackage").value = "";
+document.getElementById("productSupplier").value = "";
+document.getElementById("manualSupplier").value = "";
+document.getElementById("buyPrice").value = "";
+document.getElementById("sellPrice").value = "";
+document.getElementById("minimumStock").value = "";
+document.getElementById("barcode").value = "";
+
+productModal.classList.add("hidden");
+
+await loadProducts();
+await loadReceiveProducts();
+await loadInventory();
+
+alert("Product saved successfully.");
+}catch(error){
+
+alert(error.message);
+
+}
+
+};
+/*==================================================
+SPLASH SCREEN
+==================================================*/
+/*==================================================
+RECEIVE STOCK
+==================================================*/
+
+document.getElementById("receiveStockBtn").onclick = async function(){
+
+    if(!currentEmployee){
+
+        alert("Please login first.");
+
+        return;
+
+    }
+
+    const productId =
+    document.getElementById("receiveProduct").value;
+
+    const quantity =
+    Number(document.getElementById("receiveQuantity").value);
+
+    const cost =
+    Number(document.getElementById("receiveCost").value);
+
+    if(!productId){
+
+        alert("Please select a product.");
+        return;
+
+    }
+
+    if(isNaN(quantity) || quantity <= 0){
+
+        alert("Quantity must be greater than zero.");
+        return;
+
+    }
+
+if(isNaN(cost) || cost <= 0){
+
+    alert("Enter a valid buying price.");
+
+    return;
+
+}
+
+    const btn = document.getElementById("receiveStockBtn");
+
+    btn.disabled = true;
+    btn.textContent = "Receiving...";
+
+    try{
+
+        const productDoc = doc(db,"products",productId);
+
+const productSnapshot = await getDoc(productDoc);
+
+if(!productSnapshot.exists()){
+
+    throw new Error("Product not found.");
+
+}
+
+const data = productSnapshot.data();
+        const currentStock = Number(data.currentStock || 0);
+
+const openingStock = Number(data.openingStock || 0);
+
+const newStock = currentStock + quantity;
+
+        await updateDoc(productDoc,{
+
+    currentStock: newStock,
+    openingStock: openingStock + quantity,
+    buyingPrice: cost,
+    price: data.price,
+    updatedAt: serverTimestamp()
+
+});
+  await saveStockMovement(
+    productId,
+    data.name,
+    "RECEIVE",
+    quantity,
+    newStock,
+    "Stock received"
+);
+
+        document.getElementById("receiveProduct").value = "";
+        document.getElementById("receiveQuantity").value = "";
+        document.getElementById("receiveCost").value = "";
+        
+
+        await loadInventory();
+await loadReceiveProducts();
+
+document.getElementById("receiveProduct").value = "";
+
+alert("Stock received successfully.");
+    }catch(error){
+
+        console.error(error);
+
+        alert("Failed to receive stock.\n\n" + error.message);
+
+    }finally{
+
+        btn.disabled = false;
+        btn.textContent = "Receive Stock";
+
+    }
+
+};
+/*==================================================
+LOAD EXPENSES
+==================================================*/
+
+async function loadExpenses(){
+
+const snapshot = await getDocs(
+query(expensesRef, orderBy("createdAt","desc"))
+);
+
+const expensesList =
+document.getElementById("expensesList");
+
+expensesList.innerHTML = "";
+
+if(snapshot.empty){
+
+expensesList.innerHTML = `
+<p style="text-align:center;color:#999;">
+No expenses recorded.
+</p>`;
+
+return;
+
+}
+
+let total = 0;
+
+snapshot.forEach(doc=>{
+
+const expense = doc.data();
+
+total += Number(expense.amount || 0);
+
+expensesList.innerHTML += `
+<div style="
+padding:15px;
+margin-bottom:10px;
+background:#222;
+border:1px solid #D4AF37;
+border-radius:10px;
+">
+
+<b>${expense.description}</b><br>
+
+KSh ${Number(expense.amount).toLocaleString()}<br>
+
+<small>${expense.reason || ""}</small>
+
+</div>
+`;
+
+});
+
+expensesList.innerHTML += `
+<div style="
+margin-top:15px;
+padding:15px;
+background:#111;
+border:2px solid #D4AF37;
+border-radius:10px;
+font-weight:bold;
+">
+
+Total Expenses: KSh ${total.toLocaleString()}
+
+</div>
+`;
+
+}
+/*==================================================
+CHECK OPEN SHIFT
+==================================================*/
+
+async function checkOpenShift(){
+
+    if(!currentEmployee){
+        return false;
+    }
+
+    const q = query(
+        shiftsRef,
+        where("status","==","OPEN")
+    );
+
+    const snapshot = await getDocs(q);
+
+    if(snapshot.empty){
+        return false;
+    }
+
+    const shift = snapshot.docs[0];
+    const data = shift.data();
+
+    if(data.employeeId !== currentEmployee.id){
+
+        alert(
+            "An open shift already belongs to " +
+            data.employeeName +
+            ". It must be closed before another cashier can start a shift."
+        );
+
+        document.getElementById("startShiftBtn").disabled = true;
+
+        return true;
+
+    }
+
+    currentEmployee.shiftId = shift.id;
+document.getElementById("shiftCash").value = "";
+document.getElementById("shiftMpesa").value = "";
+document.getElementById("shiftCard").value = "";
+document.getElementById("shiftExpenses").value = "";
+document.getElementById("cashDifferenceReason").value = "";
+document.getElementById("shiftResults").style.display = "none";
+    document.getElementById("openingCash").value =
+        data.openingCash || 0;
+
+    document.getElementById("openingMpesa").value =
+        data.openingMpesa || 0;
+
+    document.getElementById("openingCash").disabled = true;
+
+    document.getElementById("openingMpesa").disabled = true;
+
+    document.getElementById("startShiftBtn").disabled = true;
+
+    document.getElementById("startShiftBtn").innerHTML =
+    '<i class="fa-solid fa-lock"></i> Shift Already Open';
+
+    return true;
+
+}
+
+/*==================================================
+START SHIFT
+==================================================*/
+document.getElementById("startShiftBtn").onclick = async function(){
+
+    if(!currentEmployee){
+        alert("Please login first.");
+        return;
+    }
+
+    if(currentEmployee.shiftId){
+        alert("You already have an open shift.");
+        return;
+    }
+
+    const openingCash = Number(document.getElementById("openingCash").value || 0);
+    const openingMpesa = Number(document.getElementById("openingMpesa").value || 0);
+
+    try{
+
+        const openShift = await checkOpenShift();
+
+        if(openShift){
+            return;
+        }
+
+        const shift = await addDoc(shiftsRef,{
+            employeeId: currentEmployee.id,
+            employeeName: currentEmployee.fullName,
+            employeeNo: currentEmployee.employeeNo,
+            role: currentEmployee.role,
+
+            openingCash,
+            openingMpesa,
+
+            status: "OPEN",
+
+            startedAt: serverTimestamp()
+        });
+
+        currentEmployee.shiftId = shift.id;
+
+        document.getElementById("openingCash").disabled = true;
+        document.getElementById("openingMpesa").disabled = true;
+
+        document.getElementById("startShiftBtn").disabled = true;
+        document.getElementById("startShiftBtn").innerHTML =
+        '<i class="fa-solid fa-lock"></i> Shift Open';
+
+        alert("Shift started successfully.");
+
+    }catch(error){
+
+        alert(error.message);
+
+    }
+
+};
+/*==================================================
+CLOSE SHIFT
+==================================================*/
+
+document.getElementById("closeShiftBtn").onclick = async function(){
+try{
+    if(!currentEmployee.shiftId){
+        alert("There is no open shift to close.");
+        return;
+    }
+
+    let totalExpenses = 0;
+const reconciliationCounts = [];
+
+    /*=========================================
+CALCULATE RECONCILIATION
+=========================================*/
+
+let openingValue = 0;
+let closingValue = 0;
+let totalSales = 0;
+let cashSales = 0;
+let mpesaSales = Number(document.getElementById("shiftMpesa").value || 0);
+let submittedCard = Number(document.getElementById("shiftCard").value || 0);
+
+document.querySelectorAll(".reconciliationCount").forEach(input=>{
+
+    const opening = Number(input.dataset.opening);
+    const closing = Number(input.value || 0);
+    const buying = Number(input.dataset.buying);
+    const selling = Number(input.dataset.selling);
+
+    reconciliationCounts.push({
+        productId:input.dataset.id,
+        productName:input.dataset.name,
+        openingStock:opening,
+        closingStock:closing,
+        buyingPrice:buying,
+        sellingPrice:selling
+    });
+
+    openingValue += opening * buying;
+    closingValue += closing * buying;
+
+    const sold = Math.max(opening - closing,0);
+
+    totalSales += sold * selling;
+
+});
+
+/* Expenses */
+
+const expensesSnapshot = await getDocs(
+    query(
+        expensesRef,
+        where("shiftId","==",currentEmployee.shiftId)
+    )
+);
+
+expensesSnapshot.forEach(docSnap=>{
+    totalExpenses += Number(docSnap.data().amount || 0);
+});
+
+/* Cash Sales */
+
+cashSales = totalSales - mpesaSales - submittedCard
+
+if(cashSales < 0){
+    cashSales = 0;
+}
+
+/* Expected Figures */
+
+const expectedCash =
+Number(document.getElementById("openingCash").value || 0) +
+cashSales -
+totalExpenses;
+const submittedCash = Number(document.getElementById("shiftCash").value || 0);
+
+const cashDifference = submittedCash - expectedCash;
+
+const submittedMpesa = mpesaSales;
+const expectedMpesa = mpesaSales;
+
+const mpesaDifference = submittedMpesa - expectedMpesa;
+
+/* Gross Profit */
+
+const grossProfit = totalSales - (openingValue - closingValue) - totalExpenses;
+
+/* Display Results */
+
+document.getElementById("openingValueResult").textContent =
+"KSh " + openingValue.toLocaleString();
+
+document.getElementById("closingValueResult").textContent =
+"KSh " + closingValue.toLocaleString();
+
+document.getElementById("salesResult").textContent =
+"KSh " + totalSales.toLocaleString();
+
+document.getElementById("expensesResult").textContent =
+"KSh " + totalExpenses.toLocaleString();
+
+document.getElementById("expectedCash").textContent =
+"KSh " + expectedCash.toLocaleString();
+
+document.getElementById("actualCash").textContent =
+"KSh " + submittedCash.toLocaleString();
+
+document.getElementById("cashDifference").textContent =
+"KSh " + cashDifference.toLocaleString();
+
+document.getElementById("profitResult").textContent =
+"KSh " + grossProfit.toLocaleString();
+
+document.getElementById("shiftResults").style.display = "block";
+await updateDoc(doc(db,"shifts",currentEmployee.shiftId),{
+
+    status:"CLOSED",
+    endedAt:serverTimestamp(),
+
+    openingValue,
+    closingValue,
+
+    totalSales,
+    totalExpenses,
+    grossProfit,
+
+    expectedCash,
+    submittedCash,
+    cashDifference,
+
+    submittedMpesa,
+submittedCard: submittedCard,
+
+differenceReason:
+document.getElementById("cashDifferenceReason").value.trim(),
+
+stockReconciliation: reconciliationCounts
+
+});
+for(const item of reconciliationCounts){
+
+    await updateDoc(
+        doc(db,"products",item.productId),
+        {
+
+            currentStock:item.closingStock,
+            openingStock:item.closingStock,
+            updatedAt:serverTimestamp()
+
+        }
+    );
+await saveStockAdjustment(
+    item.productId,
+    item.productName,
+    item.closingStock - item.openingStock,
+    item.closingStock,
+    "Shift Reconciliation"
+);
+}
+currentEmployee.shiftId = "";
+document.getElementById("openingCash").value = "";
+document.getElementById("openingMpesa").value = "";
+document.getElementById("shiftCash").value = "";
+document.getElementById("shiftMpesa").value = "";
+document.getElementById("shiftCard").value = "";
+document.getElementById("shiftExpenses").value = "";
+document.getElementById("cashDifferenceReason").value = "";
+document.getElementById("openingCash").disabled = false;
+document.getElementById("openingMpesa").disabled = false;
+
+document.getElementById("startShiftBtn").disabled = false;
+document.getElementById("startShiftBtn").innerHTML =
+'<i class="fa-solid fa-play"></i> Start Shift';
+
+alert("Shift closed successfully.");
+}catch(error){
+
+    console.error(error);
+
+    alert("Failed to close shift.\n\n" + error.message);
+
+}
+};
+
+/*==================================================
+SAVE EXPENSE
+==================================================*/
+
+document.getElementById("saveExpenseBtn").onclick = async function(){
+
+    const description =
+    document.getElementById("expenseCategory").value;
+
+    const amount =
+    Number(document.getElementById("expenseAmount").value);
+
+    const reason =
+    document.getElementById("expenseReason").value.trim();
+
+    if(!currentEmployee.shiftId){
+
+        alert("Start a shift before recording expenses.");
+        return;
+
+    }
+
+    if(description==""){
+
+        alert("Select an expense type.");
+        return;
+
+    }
+
+    if(amount<=0){
+
+        alert("Enter a valid amount.");
+        return;
+
+    }
+
+    try{
+
+        await addDoc(expensesRef,{
+
+            description,
+            amount,
+            reason,
+            employee:currentEmployee.fullName,
+            employeeNo:currentEmployee.employeeNo,
+            shiftId:currentEmployee.shiftId,
+            createdAt:serverTimestamp()
+
+        });
+
+        alert("Expense saved successfully.");
+
+        await loadExpenses();
+
+        document.getElementById("expenseCategory").value = "";
+        document.getElementById("expenseAmount").value = "";
+        document.getElementById("expenseReason").value = "";
+
+    }catch(error){
+
+        alert(error.message);
+
+    }
+
+};
+
+/*==================================================
+START RECONCILIATION
+==================================================*/
+
+window.addEventListener("load",function(){
+
+const btn =
+document.getElementById("startReconciliationBtn");
+
+if(!btn) return;
+
+btn.onclick = async function(){
+
+    await loadReconciliationProducts();
+
+    document
+    .getElementById("reconciliationProducts")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+};
+
+});
+/*==================================================
+SPLASH SCREEN
+==================================================*/
+
+setTimeout(async function(){
+
+await loadOperatingMode();
+
+document
+.getElementById("splashScreen")
+.classList.add("hidden");
+
+document
+.getElementById("loginPage")
+.classList.remove("hidden");
+
+document
+.getElementById("loginPage")
+.classList.add("pageFade");
+
+},3000);
+/*==================================================
+OPEN BILL BUTTON
+==================================================*/
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const btn = document.getElementById("newOpenBillBtn");
+
+    if(btn){
+
+        btn.onclick = function(){
+
+            alert("Open Bill feature coming next.");
+
+        };
+
+    }
+
+});
+/*==================================================
+SELL DIALOG
+==================================================*/
+
+window.showSellDialog = function(product){
+
+    let qty = 1;
+
+    const payment = prompt(
+`🍺 ${product.name}
+
+Price: KSh ${Number(product.price).toFixed(2)}
+
+Payment Method
+
+1 = Cash
+2 = M-Pesa
+
+Enter 1 or 2`
+    );
+
+    if(payment == null) return;
+
+    const quantity = prompt(
+`Quantity`,
+qty
+    );
+
+    if(quantity == null) return;
+
+    qty = Number(quantity);
+
+    if(isNaN(qty) || qty <= 0){
+
+        alert("Invalid quantity.");
+
+        return;
+
+    }
+
+    const method = payment == "2"
+        ? "Mpesa"
+        : "Cash";
+
+    sellPosProduct(product.id, qty, method);
+
+};
+</script>
+
+</body>
+
+</html>
+
