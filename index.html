@@ -2394,7 +2394,19 @@ Reports
 <p class="pageSubtitle">
 Business performance, sales and inventory reports.
 </p>
+<div style="margin:20px 0;display:flex;gap:10px;flex-wrap:wrap;">
 
+<button
+id="exportSalesBtn"
+class="goldBtn">
+
+<i class="fa-solid fa-file-csv"></i>
+
+Export Sales CSV
+
+</button>
+
+</div>
 <div class="glassCard">
 
 <h2 style="color:var(--gold);margin-bottom:15px;">
@@ -2762,7 +2774,8 @@ query,
 where,
 orderBy,
 onSnapshot,
-writeBatch
+writeBatch,
+runTransaction
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
@@ -3058,7 +3071,8 @@ const factoryResetBtn =
 document.getElementById("factoryResetBtn");
 
 factoryResetBtn.onclick = async function(){
-
+factoryResetBtn.disabled = true;
+factoryResetBtn.textContent = "Resetting...";
     if(!currentEmployee){
 
         alert("Please login first.");
@@ -3116,7 +3130,6 @@ const collections = [
     "brands",
     "categories",
     "suppliers",
-    "employees",
     "expenses",
     "expenseCategories",
     "sales",
@@ -3131,29 +3144,44 @@ try{
 
         const snapshot = await getDocs(collection(db, name));
 
-        const batch = writeBatch(db);
+        for(const docSnap of snapshot.docs){
 
-        snapshot.forEach(docSnap=>{
-            batch.delete(docSnap.ref);
-        });
+    await deleteDoc(docSnap.ref);
 
-        await batch.commit();
+}
+
+    }
+const employeesSnapshot = await getDocs(employeesRef);
+
+for (const employeeDoc of employeesSnapshot.docs) {
+
+    const employee = employeeDoc.data();
+
+    if (employee.role !== "Administrator") {
+
+        await deleteDoc(employeeDoc.ref);
 
     }
 
+}
     await setDoc(settingsDoc,{
         operatingMode:"POS"
     });
 
-    alert("Factory Reset completed successfully.");
+    currentEmployee = null;
 
-    location.reload();
+alert("Factory Reset completed successfully.");
+
+location.reload();
 
 }catch(error){
 
     console.error(error);
 
     alert("Factory Reset failed.\n\n" + error.message);
+
+    factoryResetBtn.disabled = false;
+    factoryResetBtn.textContent = "Factory Reset";
 
 }
 
@@ -3702,6 +3730,7 @@ function clearCart(){
     drawCart();
 
 }
+
 /*==================================================
 CHECKOUT SALE
 ==================================================*/
@@ -3718,102 +3747,127 @@ window.checkoutSale = async function(paymentMethod){
         return;
     }
 
-    if(posCart.length===0){
+    if(posCart.length === 0){
         alert("Cart is empty.");
         return;
     }
-/*==================================================
-CHECK AMOUNT RECEIVED
-==================================================*/
 
-const received =
-Number(document.getElementById("amountReceived").value || 0);
+    const received =
+    Number(document.getElementById("amountReceived").value || 0);
 
-let grandTotal = 0;
+    let grandTotal = 0;
 
-for(const item of posCart){
+    posCart.forEach(item=>{
+        grandTotal += item.price * item.quantity;
+    });
 
-    grandTotal += item.price * item.quantity;
+    if(received < grandTotal){
+        alert("Amount received is less than the total bill.");
+        return;
+    }
 
-}
-
-if(received < grandTotal){
-
-    alert("Amount received is less than the total bill.");
-
-    return;
-
-}
     try{
 
-grandTotal = 0;
+        let totalCost = 0;
         const saleItems = [];
 
-        for(const item of posCart){
+        await runTransaction(db, async(transaction)=>{
 
-            const productRef = doc(db,"products",item.id);
-            const productSnap = await getDoc(productRef);
+            for(const item of posCart){
 
-            if(!productSnap.exists()){
-                throw new Error(item.name + " no longer exists.");
+                const productRef =
+                doc(db,"products",item.id);
+
+                const productSnap =
+                await transaction.get(productRef);
+
+                if(!productSnap.exists()){
+                    throw new Error(item.name + " no longer exists.");
+                }
+
+                const product = productSnap.data();
+
+                const currentStock =
+                Number(product.currentStock || 0);
+
+                const buyingPrice =
+                Number(product.buyingPrice || 0);
+
+                if(currentStock < item.quantity){
+                    throw new Error(
+                        item.name +
+                        " has only " +
+                        currentStock +
+                        " remaining."
+                    );
+                }
+
+                const newStock =
+                currentStock - item.quantity;
+
+                transaction.update(productRef,{
+                    currentStock:newStock,
+                    updatedAt:serverTimestamp()
+                });
+
+                totalCost +=
+                buyingPrice * item.quantity;
+
+                saleItems.push({
+                    productId:item.id,
+                    name:item.name,
+                    price:item.price,
+                    quantity:item.quantity,
+                    total:item.price * item.quantity,
+                    newStock:newStock
+                });
+
             }
 
-            const product = productSnap.data();
-            const currentStock = Number(product.currentStock || 0);
+            const saleRef =
+            doc(collection(db,"sales"));
 
-            if(currentStock < item.quantity){
-                throw new Error(
-                    item.name + " has only " + currentStock + " remaining."
-                );
-            }
-
-            const newStock = currentStock - item.quantity;
-
-            await updateDoc(productRef,{
-                currentStock:newStock,
-                updatedAt:serverTimestamp()
+            transaction.set(saleRef,{
+                employeeId:currentEmployee.id,
+                employeeName:currentEmployee.fullName,
+                employeeNo:currentEmployee.employeeNo,
+                shiftId:currentEmployee.shiftId,
+                paymentMethod,
+                items:saleItems.map(item=>({
+                    productId:item.productId,
+                    name:item.name,
+                    price:item.price,
+                    quantity:item.quantity,
+                    total:item.total
+                })),
+                total:grandTotal,
+                costOfGoodsSold:totalCost,
+                createdAt:serverTimestamp()
             });
 
+        });
+
+        for(const item of saleItems){
+
             await saveStockMovement(
-                item.id,
+                item.productId,
                 item.name,
                 "SALE",
                 item.quantity,
-                newStock,
+                item.newStock,
                 paymentMethod + " Sale"
             );
 
-            const total = item.price * item.quantity;
-            grandTotal += total;
-
-            saleItems.push({
-                productId:item.id,
-                name:item.name,
-                price:item.price,
-                quantity:item.quantity,
-                total:total
-            });
         }
-
-        await addDoc(salesRef,{
-            employeeId:currentEmployee.id,
-            employeeName:currentEmployee.fullName,
-            employeeNo:currentEmployee.employeeNo,
-            shiftId:currentEmployee.shiftId,
-            paymentMethod,
-            items:saleItems,
-            total:grandTotal,
-            createdAt:serverTimestamp()
-        });
 
         printReceipt(paymentMethod, grandTotal);
 
-clearCart();
+        clearCart();
 
-await loadInventory();
-await loadPosProducts();
+        await loadInventory();
+        await loadPosProducts();
 
-alert("Sale completed successfully.");
+        alert("Sale completed successfully.");
 
     }catch(error){
 
@@ -3876,7 +3930,7 @@ PRINT RECEIPT
 function printReceipt(paymentMethod,total){
 
     const receiptNo =
-    "GC-" + Date.now();
+generateReceiptNumber();
 
     const received =
     Number(document.getElementById("amountReceived").value || 0);
@@ -4082,16 +4136,21 @@ filterElement ? filterElement.value : "all";
 
         let status = "🟢 In Stock";
 
-        if(stock <= 0){
+ if(stock <= 0){
 
-            status = "🔴 Out of Stock";
+    status = "🔴 Out of Stock";
 
-        }else if(stock <= minimum){
+}else if(stock <= minimum){
 
-            status = "🟡 Low Stock";
-            lowStock++;
+    status = "🟡 Low Stock";
 
-        }
+    if(stock > 0){
+
+        lowStock++;
+
+    }
+
+}
 
         inventoryList.innerHTML += `
 
@@ -4348,6 +4407,7 @@ async function loadReportSummary(){
 try{
 
 let todaySales = 0;
+let todayCOGS = 0;
 let todayExpenses = 0;
 let inventoryValue = 0;
 let inventoryCost = 0;
@@ -4376,8 +4436,9 @@ salesSnapshot.forEach(docItem=>{
 
     if(saleDate.getTime() === today.getTime()){
 
-        todaySales +=
-        Number(data.total || 0);
+        todaySales += Number(data.total || 0);
+
+        todayCOGS += Number(data.costOfGoodsSold || 0);
 
     }
 
@@ -4428,7 +4489,10 @@ inventoryValue += stock * selling;
 
 inventoryCost += stock * cost;
 
-if(stock <= Number(data.minimumStock || 0)){
+if(
+    stock > 0 &&
+    stock <= Number(data.minimumStock || 0)
+){
 
     lowStock++;
 
@@ -4436,7 +4500,7 @@ if(stock <= Number(data.minimumStock || 0)){
 
 });
 grossProfit =
-todaySales - inventoryCost - todayExpenses;
+todaySales - todayCOGS - todayExpenses;
 
 document.getElementById("reportGrossProfit").textContent =
 "KSh " + grossProfit.toLocaleString();
@@ -4744,7 +4808,8 @@ loggedIn:true
 const saveModeBtn = document.getElementById("saveOperatingModeBtn");
 
 saveModeBtn.style.display =
-(currentEmployee.role === "Admin" || currentEmployee.role === "Manager")
+(currentEmployee.role === "Administrator" ||
+ currentEmployee.role === "Manager")
 ? "block"
 : "none";
 document.getElementById("loginPage").classList.add("hidden");
@@ -5198,9 +5263,9 @@ SAVE OPERATING MODE
 document.getElementById("saveOperatingModeBtn").onclick = async function(){
 if(
 currentEmployee.role !== "Manager" &&
-currentEmployee.role !== "Admin"
+currentEmployee.role !== "Administrator"
 ){
-    alert("Only a Manager or Admin can change the operating mode.");
+    alert("Only a Manager or Administrator can change the operating mode.");
     return;
 }
 await setDoc(settingsDoc,{
@@ -6017,6 +6082,71 @@ alert(error.message);
 
 };
 /*==================================================
+EXPORT SALES TO CSV
+==================================================*/
+
+document.getElementById("exportSalesBtn").onclick = async function(){
+
+    try{
+
+        const snapshot = await getDocs(
+            query(salesRef, orderBy("createdAt","desc"))
+        );
+
+        if(snapshot.empty){
+            alert("No sales available.");
+            return;
+        }
+
+        let csv =
+"Date,Cashier,Employee No,Payment Method,Total\n";
+
+        snapshot.forEach(docSnap=>{
+
+            const sale = docSnap.data();
+
+            const date = sale.createdAt
+                ? sale.createdAt.toDate().toISOString().replace("T"," ").substring(0,19)
+                : "";
+console.log(date);
+            csv +=
+                date + "," +
+                sale.employeeName + "," +
+                sale.employeeNo + "," +
+                sale.paymentMethod + "," +
+                sale.total + "\n";
+
+        });
+
+        const blob = new Blob([csv],{
+            type:"text/csv;charset=utf-8;"
+        });
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+        a.download = "GenerationClubSales.csv";
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        URL.revokeObjectURL(url);
+
+        alert("Sales exported successfully.");
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Failed to export sales.");
+
+    }
+
+};
+/*==================================================
 SPLASH SCREEN
 ==================================================*/
 /*==================================================
@@ -6477,10 +6607,13 @@ for(const item of reconciliationCounts){
 
         }
     );
+const adjustment =
+item.openingStock - item.closingStock;
+
 await saveStockAdjustment(
     item.productId,
     item.productName,
-    item.closingStock - item.openingStock,
+    adjustment,
     item.closingStock,
     "Shift Reconciliation"
 );
@@ -6692,4 +6825,3 @@ qty
 </body>
 
 </html>
-
